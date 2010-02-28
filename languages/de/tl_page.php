@@ -19,9 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Andreas Schempp 2009
+ * @copyright  Andreas Schempp 2009-2010
  * @author     Andreas Schempp <andreas@schempp.ch>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
+ * @version    $Id$
  */
 
 
@@ -30,6 +31,8 @@
  */
 $GLOBALS['TL_LANG']['tl_page']['pageImage']			= array('Bild für diese Seite', 'Wählen Sie ein Bild für diese Seite. Wenn Sie nichts angeben wird ggf. das Bild der übergeordneten Seite verwendet.');
 $GLOBALS['TL_LANG']['tl_page']['pageImageJumpTo']	= array('Bild-Link für diese Seite', 'Sie können beim Klicken auf das Seitenbild auf eine andere TYPOlight-Seite weiterleiten.');
+$GLOBALS['TL_LANG']['tl_page']['pageImageAlt']		= array('Alternativer Text', 'Eine barrierefreie Webseite sollte immer einen alternativen Text für Bilder mit einer kurzen Beschreibung deren Inhalts enthalten.');
+$GLOBALS['TL_LANG']['tl_page']['pageImageTitle']	= array('Link-Titel', 'Geben Sie einen Titel für den Link ein. Ohne Eingabe wird der Titel der Bild-Link-Seite verwendet.');
 
 
 /**

@@ -19,21 +19,22 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Andreas Schempp 2009
+ * @copyright  Andreas Schempp 2009-2010
  * @author     Andreas Schempp <andreas@schempp.ch>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
+ * @version    $Id$
  */
 
 
 /**
  * Palettes
  */
-foreach( $GLOBALS['TL_DCA']['tl_page']['palettes'] as $strName => $strPalette )
+foreach( $GLOBALS['TL_DCA']['tl_page']['palettes'] as $name => $palette )
 {
-	if ($strName == '__selector__')
+	if ($name == '__selector__')
 		continue;
 		
-	$GLOBALS['TL_DCA']['tl_page']['palettes'][$strName] = str_replace('{meta_legend}', '{image_legend},pageImage,pageImageJumpTo;{meta_legend}', $strPalette);
+	$GLOBALS['TL_DCA']['tl_page']['palettes'][$name] = str_replace('{meta_legend}', '{image_legend:hide},pageImage,pageImageJumpTo,pageImageAlt,pageImageTitle;{meta_legend}', $palette);
 }
 
 
@@ -54,5 +55,21 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageJumpTo'] = array
 	'inputType'		=> 'pageTree',
 	'exclude'		=> true,
 	'eval'			=> array('fieldType'=>'radio'),
+);
+
+$GLOBALS['TL_DCA']['tl_page']['fields']['pageImageAlt'] = array
+(
+	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImageAlt'],
+	'inputType'		=> 'text',
+	'exclude'		=> true,
+	'eval'			=> array('maxlength'=>255, 'tl_class'=>'w50'),
+);
+
+$GLOBALS['TL_DCA']['tl_page']['fields']['pageImageTitle'] = array
+(
+	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImageTitle'],
+	'inputType'		=> 'text',
+	'exclude'		=> true,
+	'eval'			=> array('maxlength'=>255, 'tl_class'=>'w50'),
 );
 
