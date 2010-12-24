@@ -1,13 +1,15 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +18,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
  * @copyright  Andreas Schempp 2009-2010
- * @author     Andreas Schempp <andreas@schempp.ch
+ * @author     Andreas Schempp <andreas@schempp.ch>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  * @version    $Id$
  */
@@ -59,13 +61,17 @@ class ModulePageImage extends Module
 	{
 		global $objPage;
 		
+		$arrSize = deserialize($this->imgSize);
+		
 		// Current page has an image
 		if (strlen($objPage->pageImage))
 		{
-			$this->Template->src = $objPage->pageImage;
+			$strImage = $this->getImage($objPage->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
+			
+			$this->Template->src = $strImage;
 			$this->Template->alt = $objPage->pageImageAlt;
 			
-			if (($imgSize = @getimagesize(TL_ROOT . '/' . $objPage->pageImage)) !== false)
+			if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
 			{
 				$this->Template->size = ' ' . $imgSize[3];
 			}
@@ -92,10 +98,12 @@ class ModulePageImage extends Module
 			{
 				if (strlen($objTrail->pageImage))
 				{
-					$this->Template->src = $objTrail->pageImage;
-					$this->Template->alt = $objPage->pageImageAlt;
+					$strImage = $this->getImage($objTrail->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 					
-					if (($imgSize = @getimagesize(TL_ROOT . '/' . $objTrail->pageImage)) !== false)
+					$this->Template->src = $strImage;
+					$this->Template->alt = $objTrail->pageImageAlt;
+					
+					if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
 					{
 						$this->Template->size = ' ' . $imgSize[3];
 					}
