@@ -39,7 +39,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = array
 	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
 	'inputType'		=> 'fileTree',
 	'exclude'		=> true,
-	'eval'			=> array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png'),
+	'eval'			=> array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png'),
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageJumpTo'] = array

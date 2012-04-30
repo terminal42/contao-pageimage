@@ -24,3 +24,9 @@
  */
 $GLOBALS['FE_MOD']['miscellaneous']['pageImage'] = 'ModulePageImage';
 
+
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('PageImage', 'replaceTags');
+

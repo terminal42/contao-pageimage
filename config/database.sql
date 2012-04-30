@@ -12,7 +12,7 @@
 -- 
 
 CREATE TABLE `tl_page` (
-  `pageImage` varchar(255) NOT NULL default '',
+  `pageImage` blob NULL,
   `pageImageJumpTo` varchar(255) NOT NULL default '',
   `pageImageAlt` varchar(255) NOT NULL default '',
   `pageImageTitle` varchar(255) NOT NULL default '',
