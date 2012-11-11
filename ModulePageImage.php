@@ -64,8 +64,14 @@ class ModulePageImage extends Module
 		$arrSize = deserialize($this->imgSize);
 		
 		// Current page has an image
-		if (strlen($objPage->pageImage))
+		if ($objPage->pageImage)
 		{
+			
+			if (is_numeric($objPage->pageImage)) 
+			{
+                		$objFile = \FilesModel::findByPk($objPage->pageImage);
+                		$objPage->pageImage = $objFile->path;
+            		}
 			$strImage = $this->getImage($objPage->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 			
 			$this->Template->src = $strImage;
@@ -96,11 +102,17 @@ class ModulePageImage extends Module
 			
 			while( $objTrail->next() )
 			{
-				if (strlen($objTrail->pageImage))
+				if ($objTrail->pageImage)
 				{
+					if (is_numeric($objTrail->pageImage)) 
+					{
+                        			$objFile = \FilesModel::findByPk($objTrail->pageImage);
+                        			$objTrail->pageImage = $objFile->path;
+                    			}
 					$strImage = $this->getImage($objTrail->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 					
 					$this->Template->src = $strImage;
+		                    	$objPage->pageImage = $strImage; // pass on objPage
 					$this->Template->alt = $objTrail->pageImageAlt;
 					
 					if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
