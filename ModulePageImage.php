@@ -43,7 +43,7 @@ class ModulePageImage extends Module
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -64,11 +64,18 @@ class ModulePageImage extends Module
 		$arrSize = deserialize($this->imgSize);
 		
 		// Current page has an image
-		if (strlen($objPage->pageImage))
+		if ($objPage->pageImage)
 		{
+			
+			if (is_numeric($objPage->pageImage)) 
+			{
+                		$objFile = \FilesModel::findByPk($objPage->pageImage);
+                		$objPage->pageImage = $objFile->path;
+            		}
 			$strImage = $this->getImage($objPage->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 			
 			$this->Template->src = $strImage;
+                    	$objPage->pageImage = $strImage; // pass on objPage
 			$this->Template->alt = $objPage->pageImageAlt;
 			
 			if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
@@ -96,11 +103,17 @@ class ModulePageImage extends Module
 			
 			while( $objTrail->next() )
 			{
-				if (strlen($objTrail->pageImage))
+				if ($objTrail->pageImage)
 				{
+					if (is_numeric($objTrail->pageImage)) 
+					{
+                        			$objFile = \FilesModel::findByPk($objTrail->pageImage);
+                        			$objTrail->pageImage = $objFile->path;
+                    			}
 					$strImage = $this->getImage($objTrail->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 					
 					$this->Template->src = $strImage;
+		                    	$objPage->pageImage = $strImage; // pass on objPage
 					$this->Template->alt = $objTrail->pageImageAlt;
 					
 					if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
