@@ -24,7 +24,7 @@
  * @copyright  Andreas Schempp 2009-2010
  * @author     Andreas Schempp <andreas@schempp.ch>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
- * @version    $Id$
+ * @version    $Id: ModulePageImage.php 175 2010-12-24 11:22:55Z aschempp $
  */
 
 
@@ -66,6 +66,7 @@ class ModulePageImage extends Module
 		// Current page has an image
 		if (strlen($objPage->pageImage))
 		{
+			$objPage->pageImage = FilesModel::findByPk($objPage->pageImage)->path;
 			$strImage = $this->getImage($objPage->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 			
 			$this->Template->src = $strImage;
@@ -98,6 +99,7 @@ class ModulePageImage extends Module
 			{
 				if (strlen($objTrail->pageImage))
 				{
+					$objTrail->pageImage = FilesModel::findByPk($objTrail->pageImage)->path;				
 					$strImage = $this->getImage($objTrail->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
 					
 					$this->Template->src = $strImage;
