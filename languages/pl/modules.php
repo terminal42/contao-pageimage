@@ -22,11 +22,11 @@
 /**
  * Extension folder
  */
-$GLOBALS['TL_LANG']['MOD']['pageImage'] = array('Page Image', '');
+$GLOBALS['TL_LANG']['MOD']['pageImage'] = array('Obrazek strony', '');
 
 
 /**
  * Frontend modules
  */
-$GLOBALS['TL_LANG']['FMD']['pageImage']	= array('Page Image', 'Allows you to set an image for each page and display it in the frontend. Images can be inherit from parent pages.');
+$GLOBALS['TL_LANG']['FMD']['pageImage']	= array('Obrazek strony', 'Pozwala na dodanie obrazka dla każdej strony i wyświetlenie go. Obrazki mogą być dziedziczone ze stron rodziców.');
 

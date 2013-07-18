@@ -20,13 +20,18 @@
 
 
 /**
- * Extension folder
+ * Register the classes
  */
-$GLOBALS['TL_LANG']['MOD']['pageImage'] = array('Page Image', '');
+ClassLoader::addClasses(array
+(
+	'ModulePageImage' => 'system/modules/pageimage/ModulePageImage.php'
+));
 
 
 /**
- * Frontend modules
+ * Register the templates
  */
-$GLOBALS['TL_LANG']['FMD']['pageImage']	= array('Page Image', 'Allows you to set an image for each page and display it in the frontend. Images can be inherit from parent pages.');
-
+TemplateLoader::addFiles(array
+(
+	'mod_pageimage' => 'system/modules/pageimage/templates'
+));

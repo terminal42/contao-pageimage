@@ -20,13 +20,7 @@
 
 
 /**
- * Extension folder
+ * Fields
  */
-$GLOBALS['TL_LANG']['MOD']['pageImage'] = array('Page Image', '');
-
-
-/**
- * Frontend modules
- */
-$GLOBALS['TL_LANG']['FMD']['pageImage']	= array('Page Image', 'Allows you to set an image for each page and display it in the frontend. Images can be inherit from parent pages.');
+$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'] = array('Użyj obrazka nadrzędnego', 'Użyj obrazka strony nadrzędnej, jeśli nie ma ustawionego obrazka dla aktywnej strony.');
 
