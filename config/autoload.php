@@ -23,13 +23,25 @@
  * PHP version 5
  * @copyright  Andreas Schempp 2009-2010
  * @author     Andreas Schempp <andreas@schempp.ch>
+ * @author     Kamil Kuzminski <kamil.kuzminski@codefog.pl>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  * @version    $Id$
  */
 
 
 /**
- * Fields
+ * Register the classes
  */
-$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'] = array('Übergeordnete Bilder verwenden', 'Falls der aktuellen Seite kein Bild zugeordnet ist, wird das Bild der übergeordneten Seite verwendet.');
+ClassLoader::addClasses(array
+(
+	'ModulePageImage' => 'system/modules/pageimage/ModulePageImage.php'
+));
 
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'mod_pageimage' => 'system/modules/pageimage/templates'
+));

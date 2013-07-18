@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -23,6 +23,7 @@
  * PHP version 5
  * @copyright  Andreas Schempp 2009-2010
  * @author     Andreas Schempp <andreas@schempp.ch>
+ * @author     Kamil Kuzminski <kamil.kuzminski@codefog.pl>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  * @version    $Id$
  */
@@ -31,8 +32,8 @@
 class ModulePageImage extends Module
 {
 	protected $strTemplate = 'mod_pageimage';
-	
-	
+
+
 	public function generate()
 	{
 		if (TL_MODE == 'BE')
@@ -49,37 +50,50 @@ class ModulePageImage extends Module
 		}
 
 		$strBuffer = parent::generate();
-		
+
 		if (!strlen($this->Template->src))
 			return '';
-			
+
 		return $strBuffer;
 	}
-	
-	
+
+
 	protected function compile()
 	{
 		global $objPage;
-		
+
 		$arrSize = deserialize($this->imgSize);
-		
+
 		// Current page has an image
-		if (strlen($objPage->pageImage))
+		if ($objPage->pageImage)
 		{
-			$strImage = $this->getImage($objPage->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
-			
+			$strPath = $objPage->pageImage;
+
+			// Contao 3 mode
+			if (is_numeric($objPage->pageImage))
+			{
+				$objImage = \FilesModel::findByPk($objPage->pageImage);
+
+				if ($objImage !== null)
+				{
+					$strPath = $objImage->path;
+				}
+			}
+
+			$strImage = $this->getImage($strPath, $arrSize[0], $arrSize[1], $arrSize[2]);
+
 			$this->Template->src = $strImage;
 			$this->Template->alt = $objPage->pageImageAlt;
-			
+
 			if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
 			{
 				$this->Template->size = ' ' . $imgSize[3];
 			}
-			
+
 			if ($objPage->pageImageJumpTo)
 			{
 				$objJumpTo = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objPage->pageImageJumpTo);
-				
+
 				if ($objJumpTo->numRows)
 				{
 					$this->Template->hasLink = true;
@@ -88,30 +102,43 @@ class ModulePageImage extends Module
 				}
 			}
 		}
-		
+
 		// Walk the trail
 		elseif ($this->inheritPageImage && count($objPage->trail))
 		{
 			$objTrail = $this->Database->execute("SELECT * FROM tl_page WHERE id IN (" . implode(',', $objPage->trail) . ") ORDER BY id=" . implode(' DESC, id=', array_reverse($objPage->trail)) . " DESC");
-			
+
 			while( $objTrail->next() )
 			{
-				if (strlen($objTrail->pageImage))
+				if ($objTrail->pageImage)
 				{
-					$strImage = $this->getImage($objTrail->pageImage, $arrSize[0], $arrSize[1], $arrSize[2]);
-					
+					$strPath = $objTrail->pageImage;
+
+					// Contao 3 mode
+					if (is_numeric($objTrail->pageImage))
+					{
+						$objImage = \FilesModel::findByPk($objTrail->pageImage);
+
+						if ($objImage !== null)
+						{
+							$strPath = $objImage->path;
+						}
+					}
+
+					$strImage = $this->getImage($strPath, $arrSize[0], $arrSize[1], $arrSize[2]);
+
 					$this->Template->src = $strImage;
 					$this->Template->alt = $objTrail->pageImageAlt;
-					
+
 					if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
 					{
 						$this->Template->size = ' ' . $imgSize[3];
 					}
-					
+
 					if ($objTrail->pageImageJumpTo)
 					{
 						$objJumpTo = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objTrail->pageImageJumpTo);
-						
+
 						if ($objJumpTo->numRows)
 						{
 							$this->Template->hasLink = true;
@@ -119,7 +146,7 @@ class ModulePageImage extends Module
 							$this->Template->href = $this->generateFrontendUrl($objJumpTo->row());
 						}
 					}
-					
+
 					return;
 				}
 			}
