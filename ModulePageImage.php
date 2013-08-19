@@ -73,6 +73,7 @@ class ModulePageImage extends Module
 			$strImage = $this->getImage($strPath, $arrSize[0], $arrSize[1], $arrSize[2]);
 
 			$this->Template->src = $strImage;
+			$objPage->pageImage = $strImage; // pass on objPage
 			$this->Template->alt = $objPage->pageImageAlt;
 
 			if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
@@ -118,6 +119,7 @@ class ModulePageImage extends Module
 					$strImage = $this->getImage($strPath, $arrSize[0], $arrSize[1], $arrSize[2]);
 
 					$this->Template->src = $strImage;
+		                    	$objPage->pageImage = $strImage; // pass on objPage
 					$this->Template->alt = $objTrail->pageImageAlt;
 
 					if (($imgSize = @getimagesize(TL_ROOT . '/' . $strImage)) !== false)
