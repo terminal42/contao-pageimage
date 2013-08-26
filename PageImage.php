@@ -155,23 +155,41 @@ class PageImage extends Frontend
 	 * @param	int
 	 * @return	array
 	 */
-	protected function parsePage(Database_Result $objPage, $intIndex)
+	protected function parsePage(Contao\PageModel $objPage, $intIndex)
 	{
-		$arrImages = deserialize($objPage->pageImage, true);
-		natcasesort($arrImages);
-		
-		$strImage = $intIndex < count($arrImages) ? $arrImages[$intIndex] : $arrImages[0];
-		
-		$arrData = array
-		(
-			'src'	=> $strImage,
-			'alt'	=> $objPage->pageImageAlt,
-		);
-		
+        $arrOptions = array();
+        $arrOrder = array_filter(explode(',', $objPage->pageImageOrder));
+
+        if (!empty($arrOrder)) {
+            $arrOptions['order'] = Database::getInstance()->findInSet('id', $arrOrder);
+        }
+
+        $arrImages = array();
+        $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true), $arrOptions);
+
+        if (null !== $objImages) {
+            while ($objImages->next()) {
+
+                $objFile = new \File($objImages->path, true);
+
+                if (!$objFile->isGdImage) {
+                    continue;
+                }
+
+                $arrImages[] = $objImages->row();
+            }
+        }
+
+        // reset index if necessary
+        $intIndex = $intIndex < count($arrImages) ? $intIndex : 0;
+
+		$arrData = $arrImages[$intIndex];
+        $arrData['alt']	= $objPage->pageImageAlt;
+
 		if ($objPage->pageImageJumpTo)
 		{
 			$objJumpTo = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objPage->pageImageJumpTo);
-			
+
 			if ($objJumpTo->numRows)
 			{
 				$arrData['hasLink'] = true;

@@ -24,7 +24,8 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModulePageImage' => 'system/modules/pageimage/ModulePageImage.php'
+	'ModulePageImage' => 'system/modules/pageimage/ModulePageImage.php',
+    'PageImage' => 'system/modules/pageimage/PageImage.php',
 ));
 
 
