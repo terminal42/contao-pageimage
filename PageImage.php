@@ -200,5 +200,62 @@ class PageImage extends Frontend
 
 		return $arrData;
 	}
+
+
+    /**
+     * Parse the given page and return information of all images
+     * @param	Database_Result
+     * @param	int
+     * @return	array
+     */
+    public function getAllPageImages(Contao\PageModel $objPage, $intIndex, $arrImgSize = array(0, 0, 'center_center'))
+    {
+        $arrOptions = array();
+        $arrOrder = array_filter(explode(',', $objPage->pageImageOrder));
+
+        if (!empty($arrOrder)) {
+            $arrOptions['order'] = Database::getInstance()->findInSet('id', $arrOrder);
+        }
+
+        $arrImages = array();
+        $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true), $arrOptions);
+
+        if (null !== $objImages) {
+            while ($objImages->next()) {
+
+                $objFile = new \File($objImages->path, true);
+
+                if (!$objFile->isGdImage) {
+                    continue;
+                }
+
+                $arrMeta = $this->getMetaData($objImages->meta, $objPage->language);
+
+                // Use the file name as title if none is given
+                if ($arrMeta['title'] == '')
+                {
+                    $arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+                }
+
+                // Add the image
+                $arrImage = array
+                (
+                    'id'        => $objImages->id,
+                    'name'      => $objFile->basename,
+                    'src'       => $objImages->path,
+                    'src_thumb' => $this->getImage($objImages->path, $arrImgSize[0], $arrImgSize[1], $arrImgSize[2]),
+                    'href'      => $objImages->path,
+                    'alt'       => $arrMeta['title'],
+                    'imageUrl'  => $arrMeta['link'],
+                    'caption'   => $arrMeta['caption']
+                );
+
+                $arrImages[] = $arrImage;
+            }
+        }
+
+        return $arrImages;
+    }
+
 }
 
