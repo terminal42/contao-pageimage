@@ -92,7 +92,7 @@ class PageImage extends Frontend
 			case 'pageimage_alt':
 			case 'pageimage_title':
 			case 'pageimage_href':
-				$arrImage = $this->getPageImage($arrTag[1]);
+				$arrImage = $this->getPageImage(false, $arrTag[1]);
 
 				if ($arrImage === false)
 				{
@@ -113,7 +113,7 @@ class PageImage extends Frontend
 	 * @param	bool
 	 * @return	mixed
 	 */
-	public function getPageImage($intIndex=0, $blnInherit=true)
+	public function getPageImage($blnMultipleImages, $intIndex=0, $intTotal=null, $blnInherit=true)
 	{
 		$intIndex = (int)$intIndex;
 		
@@ -126,7 +126,7 @@ class PageImage extends Frontend
 			// Current page has an image
 			if ($objPage->pageImage != '')
 			{
-				$this->arrCache[$intIndex] = $this->parsePage($objPage, $intIndex);
+				$this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
 			}
 			
 			// Walk the trail
@@ -138,7 +138,7 @@ class PageImage extends Frontend
 				{
 					if ($objTrail->pageImage != '')
 					{
-						$this->arrCache[$intIndex] = $this->parsePage($objTrail, $intIndex);
+						$this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objTrail, $intIndex, $intTotal);
 						break;
 					}
 				}
@@ -155,7 +155,7 @@ class PageImage extends Frontend
 	 * @param	int
 	 * @return	array
 	 */
-	protected function parsePage(Contao\PageModel $objPage, $intIndex)
+	protected function parsePage($blnMultipleImages, $objPage, $intIndex = null, $intTotal = null)
 	{
         $arrOptions = array();
         $arrOrder = array_filter(explode(',', $objPage->pageImageOrder));
@@ -164,59 +164,18 @@ class PageImage extends Frontend
             $arrOptions['order'] = Database::getInstance()->findInSet('id', $arrOrder);
         }
 
-        $arrImages = array();
-        $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true), $arrOptions);
+        $arrJumpTo = array();
+        if ($objPage->pageImageJumpTo)
+        {
+            $objJumpTo = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objPage->pageImageJumpTo);
 
-        if (null !== $objImages) {
-            while ($objImages->next()) {
-
-                $objFile = new \File($objImages->path, true);
-
-                if (!$objFile->isGdImage) {
-                    continue;
-                }
-
-                $arrImages[] = $objImages->row();
+            if ($objJumpTo->numRows)
+            {
+                $arrJumpTo['title'] = $objPage->pageImageTitle ? $objPage->pageImageTitle : ($objJumpTo->pageTitle ? $objJumpTo->pageTitle : $objJumpTo->title);
+                $arrJumpTo['href'] = $this->generateFrontendUrl($objJumpTo->row());
             }
         }
 
-        // reset index if necessary
-        $intIndex = $intIndex < count($arrImages) ? $intIndex : 0;
-
-		$arrData = $arrImages[$intIndex];
-        $arrData['alt']	= $objPage->pageImageAlt;
-
-		if ($objPage->pageImageJumpTo)
-		{
-			$objJumpTo = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objPage->pageImageJumpTo);
-
-			if ($objJumpTo->numRows)
-			{
-				$arrData['hasLink'] = true;
-				$arrData['title'] = $objPage->pageImageTitle ? $objPage->pageImageTitle : ($objJumpTo->pageTitle ? $objJumpTo->pageTitle : $objJumpTo->title);
-				$arrData['href'] = $this->generateFrontendUrl($objJumpTo->row());
-			}
-		}
-
-		return $arrData;
-	}
-
-
-    /**
-     * Parse the given page and return information of all images
-     * @param	Database_Result
-     * @param	int
-     * @return	array
-     */
-    public function getAllPageImages(Contao\PageModel $objPage, $intIndex, $arrImgSize = array(0, 0, 'center_center'))
-    {
-        $arrOptions = array();
-        $arrOrder = array_filter(explode(',', $objPage->pageImageOrder));
-
-        if (!empty($arrOrder)) {
-            $arrOptions['order'] = Database::getInstance()->findInSet('id', $arrOrder);
-        }
-
         $arrImages = array();
         $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true), $arrOptions);
 
@@ -224,38 +183,50 @@ class PageImage extends Frontend
             while ($objImages->next()) {
 
                 $objFile = new \File($objImages->path, true);
-
                 if (!$objFile->isGdImage) {
                     continue;
                 }
+                $arrImage = $objImages->row();
+
 
                 $arrMeta = $this->getMetaData($objImages->meta, $objPage->language);
-
                 // Use the file name as title if none is given
                 if ($arrMeta['title'] == '')
                 {
                     $arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
                 }
+                $arrImage['imageUrl'] = $arrMeta['link'];
+                $arrImage['caption'] = $arrMeta['caption'];
 
-                // Add the image
-                $arrImage = array
-                (
-                    'id'        => $objImages->id,
-                    'name'      => $objFile->basename,
-                    'src'       => $objImages->path,
-                    'src_thumb' => $this->getImage($objImages->path, $arrImgSize[0], $arrImgSize[1], $arrImgSize[2]),
-                    'href'      => $objImages->path,
-                    'alt'       => $arrMeta['title'],
-                    'imageUrl'  => $arrMeta['link'],
-                    'caption'   => $arrMeta['caption']
-                );
+                $arrImage['alt'] = $objPage->pageImageAlt;
+                $arrImage['title'] = $arrJumpTo['title'];
+                $arrImage['href'] = $arrJumpTo['href'];
 
                 $arrImages[] = $arrImage;
             }
         }
 
-        return $arrImages;
-    }
+        if($blnMultipleImages) {
+
+            // number of elements limited
+            if(isset($intTotal) && $intTotal > 0) {
+
+                // specific index selected
+                if(isset($intIndex) && $intIndex > 0) {
+                    return array_slice($arrImages, $intIndex, $intTotal);
+                } else {
+                    return array_slice($arrImages, $intTotal);
+                }
+            }
+
+        } else {
+            $intIndex = $intIndex < count($arrImages) ? $intIndex : 0;
+            return $arrImages[$intIndex];
+        }
+
+
+		return $arrImages;
+	}
 
 }
 

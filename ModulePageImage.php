@@ -52,7 +52,7 @@ class ModulePageImage extends Module
 
     protected function compile()
     {
-        $arrImage = $this->PageImage->getPageImage($this->levelOffset, $this->inheritPageImage);
+        $arrImage = $this->PageImage->getPageImage(false, $this->levelOffset, null, $this->inheritPageImage);
 
         if ($arrImage === false)
         {

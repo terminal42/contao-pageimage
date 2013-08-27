@@ -6,7 +6,7 @@ var SuperBGImage = new Class({
 
     options: {
         id: 'superbgimage', // id for the containter
-        z_index: 0, // z-index for the container
+        z_index: -1, // z-index for the container
         inlineMode: 0, // 0-resize to browser size, 1-do not resize to browser-size
         showimage: 1, // number of first image to display
         vertical_center: 1, // 0-align top, 1-center vertical

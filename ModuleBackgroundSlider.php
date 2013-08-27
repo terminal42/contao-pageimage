@@ -48,8 +48,7 @@ class ModuleBackgroundSlider extends Module
         global $objPage;
         $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/pageimage/assets/superbgimage.js';
 
-
-        $arrImages = $this->PageImage->getAllPageImages($objPage, $this->levelOffset, ($this->imgSize ? deserialize($this->imgSize) : null));
+        $arrImages = $this->PageImage->getPageImage(true, $this->levelOffset, 0, $this->inheritPageImage);
 
         if ($arrImages === false)
         {

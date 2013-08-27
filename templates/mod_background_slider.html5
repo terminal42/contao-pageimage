@@ -1,9 +1,9 @@
 
 <!-- indexer::stop -->
-<div id="pageimage<?php echo $this->id; ?>" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div id="pageimage<?php echo $this->id; ?>" style="display: none;" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 
 <?php foreach ($this->images as $image): ?>
-<a href="<?php echo $image['src']; ?>"><?php echo $image['alt']; ?></a>
+<a href="<?php echo $image['path']; ?>"><?php echo $image['name']; ?></a>
 <?php endforeach; ?>
 
 </div>

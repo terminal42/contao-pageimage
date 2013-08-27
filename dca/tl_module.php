@@ -23,7 +23,7 @@
 * Palettes
 */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage,levelOffset;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundSlider'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage;levelOffset,slider_transition,slider_autostart,slider_randomOrder,slider_interval,slider_animationDuration;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundSlider'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage;levelOffset,showLevel,slider_transition,slider_autostart,slider_randomOrder,slider_interval,slider_animationDuration;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
