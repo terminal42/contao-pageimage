@@ -32,6 +32,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundSlider'] = '{title_legend
 $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
+    'exclude'       => true,
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
     'sql'           => "char(1) NOT NULL default ''",
@@ -40,6 +41,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_autostart'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_autostart'],
+    'exclude'       => true,
     'default'       => '1',
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
@@ -49,6 +51,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_autostart'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_randomOrder'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_randomOrder'],
+    'exclude'       => true,
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
     'sql'           => "char(1) NOT NULL default ''",
@@ -57,6 +60,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_randomOrder'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_interval'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_interval'],
+    'exclude'       => true,
     'default'       => '5000',
     'inputType'     => 'text',
     'eval'          => array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
@@ -66,6 +70,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_interval'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_animationDuration'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_animationDuration'],
+    'exclude'       => true,
     'inputType'     => 'text',
     'default'       => 600,
     'eval'          => array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
@@ -75,6 +80,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_animationDuration'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_transition'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_transition'],
+    'exclude'       => true,
     'inputType'     => 'select',
     'options'       => array(0, 1),
     'reference'     => array(
