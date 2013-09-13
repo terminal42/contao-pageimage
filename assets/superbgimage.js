@@ -10,6 +10,7 @@ var SuperBGImage = new Class({
         inlineMode: 0, // 0-resize to browser size, 1-do not resize to browser-size
         showimage: 1, // number of first image to display
         vertical_center: 1, // 0-align top, 1-center vertical
+        horizontal_center: 1, // 0-align left, 1-center horizontally
         transition: 1, // 0-none, 1-fade, 2-slide down, 3-slide left, 4-slide top, 5-slide right, 6-blind horizontal, 7-blind vertical, 90-slide right/left, 91-slide top/down
         transitionout: 1, // 0-no transition for previous image, 1-transition for previous image
         randomtransition: 0, // 0-none, 1-use random transition (0-7)
@@ -301,8 +302,12 @@ var SuperBGImage = new Class({
 			thisimg.setStyle('height', newheight);
 		}
 
-		// set new left position
-		thisimg.setStyle('left', newleft + 'px');
+		// set new left when option horizontal_center is on, otherwise set to 0
+		if (this.options.horizontal_center === 1) {
+    		thisimg.setStyle('left', newleft + 'px');
+		} else {
+    		thisimg.setStyle('left', '0px');
+		}
 
 		// set new top when option vertical_center is on, otherwise set to 0
 		if (this.options.vertical_center === 1){
