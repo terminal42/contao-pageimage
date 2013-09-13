@@ -68,7 +68,7 @@ var SuperBGImage = new Class({
 		}
 
 		// hide all images, set position absolute
-		this.container.getElements('img').fade('hide').setStyle('position', 'absolute');
+		this.container.getElements('img').fade('hide').setStyles({'position':'absolute', 'max-width':'none'});
 
 		// add rel-attribute with index to all existing images
 		this.container.getChildren('img').forEach((function(el) {
@@ -166,7 +166,7 @@ var SuperBGImage = new Class({
 		// preload image, set rel and title, prepend image to container, remove preload class
 		var img = Asset.image(el.get('href'), {
     		onLoad: (function() {
-    			img.setStyle('position', 'absolute').fade('hide');
+    			img.setStyles({'position':'absolute', 'max-width':'none'}).fade('hide');
     			if (this.container.getChildren('img' + "[rel='" + imgrel + "']").length === 0) {
     				img.set('rel', imgrel);
     				if (this.options.showtitle === 1) {
@@ -400,7 +400,7 @@ var SuperBGImage = new Class({
 		if (this.container.getChildren('img' + "[rel='" + this.imgActual + "']").length === 0) {
 			var img = Asset.image(imgsrc, {
     			onLoad: (function() {
-    				img.setStyle('position', 'absolute').fade('hide');
+    				img.setStyles({'position':'absolute', 'max-width':'none'}).fade('hide');
     				if (this.container.getChildren('img' + "[rel='" + this.imgActual + "']").length === 0) {
     					img.set('rel', this.imgActual);
     					if (this.options.showtitle === 1) {
