@@ -10,11 +10,11 @@
 <script>
 new SuperBGImage(document.id('pageimage<?php echo $this->id; ?>'),
 {
-    slideshow: <?php echo $this->settings['slideshow']; ?>,
-    transition: <?php echo $this->settings['transition']; ?>,
-    randomimage: <?php echo $this->settings['randomimage']; ?>,
-    slide_interval: <?php echo $this->settings['slide_interval']; ?>,
-    speed: <?php echo $this->settings['speed']; ?>
+    slideshow: <?php echo $this->slideshow; ?>,
+    transition: <?php echo $this->transition; ?>,
+    randomimage: <?php echo $this->randomimage; ?>,
+    slide_interval: <?php echo $this->slide_interval; ?>,
+    speed: <?php echo $this->speed; ?>
 });
 </script>
 <!-- indexer::continue -->

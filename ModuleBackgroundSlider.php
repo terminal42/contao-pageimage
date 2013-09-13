@@ -55,12 +55,10 @@ class ModuleBackgroundSlider extends Module
         $arrImages = PageImage::getInstance()->getMultiple($this->levelOffset, ($this->showLevel ?: null), $this->inheritPageImage);
 
         $this->Template->images = $arrImages;
-        $this->Template->settings = array(
-            'slideshow'         => (count($arrImages) > 1 ? $this->slider_autostart : 0),
-            'transition'        => $this->slider_transition,
-            'slide_interval'    => $this->slider_interval,
-            'speed'             => $this->slider_animationDuration,
-            'randomimage'       => (int)$this->slider_randomOrder,
-        );
+        $this->Template->slideshow         = (count($arrImages) > 1 ? $this->slider_autostart : 0);
+        $this->Template->transition        = $this->slider_transition;
+        $this->Template->slide_interval    = $this->slider_interval;
+        $this->Template->speed             = $this->slider_animationDuration;
+        $this->Template->randomimage       = (int) $this->slider_randomOrder;
     }
 }
