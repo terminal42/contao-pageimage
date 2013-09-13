@@ -16,7 +16,6 @@ new SuperBGImage(document.id('pageimage<?php echo $this->id; ?>'),
         randomimage: <?php echo $this->settings['randomimage']; ?>,
         slide_interval: <?php echo $this->settings['slide_interval']; ?>,
         speed: <?php echo $this->settings['speed']; ?>
-
     });
 </script>
 <!-- indexer::continue -->

@@ -29,7 +29,7 @@ class ModuleBackgroundSlider extends Module
         {
             $objTemplate = new BackendTemplate('be_wildcard');
 
-            $objTemplate->wildcard = '### Background Image ###';
+            $objTemplate->wildcard = '### BACKGROUND IMAGE ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
@@ -39,6 +39,7 @@ class ModuleBackgroundSlider extends Module
         }
 
         $this->import('PageImage');
+
         return parent::generate();
     }
 
@@ -65,6 +66,5 @@ class ModuleBackgroundSlider extends Module
             'randomimage'       => (int)$this->slider_randomOrder,
 
         );
-
     }
 }

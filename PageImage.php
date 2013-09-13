@@ -183,6 +183,7 @@ class PageImage extends Frontend
             while ($objImages->next()) {
 
                 $objFile = new \File($objImages->path, true);
+
                 if (!$objFile->isGdImage) {
                     continue;
                 }
@@ -190,6 +191,7 @@ class PageImage extends Frontend
 
 
                 $arrMeta = $this->getMetaData($objImages->meta, $objPage->language);
+
                 // Use the file name as title if none is given
                 if ($arrMeta['title'] == '')
                 {

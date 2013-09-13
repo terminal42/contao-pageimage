@@ -58,6 +58,7 @@ var SuperBGImage = new Class({
 
 		// set required css options
 		this.container.setStyles({'display':'none', 'overflow':'hidden', 'z-index':this.options.z_index});
+
 		// set required css options for fullscreen mode
 		if (this.options.inlineMode === 0) {
 			this.container.setStyles({'position':'fixed', 'width':'100%', 'height':'100%', 'top':0, 'left':0});
@@ -320,21 +321,22 @@ var SuperBGImage = new Class({
 	// calculate image size, top and left position
 	calcSize: function(imgw, imgh) {
 
-		// get browser dimensions
-		var browserwidth = window.getSize().x;
-		var browserheight = window.getSize().y;
+		// browser dimensions
+		var browserwidth, browserheight, newwidth, newheight;
 
 		// use container dimensions when inlinemode is on
 		if (this.options.inlineMode === 1) {
 			browserwidth = this.container.getSize().x;
 			browserheight = this.container.getSize().y;
+		} else {
+    		browserwidth = window.getSize().x;
+            browserheight = window.getSize().y;
 		}
 
 		// calculate ratio
 		var ratio = imgh / imgw;
 
 		// calculate new size
-		var newheight = 0; var newwidth = 0;
 		if ((browserheight / browserwidth) > ratio) {
 			newheight = browserheight;
 			newwidth = Math.round(browserheight / ratio);
