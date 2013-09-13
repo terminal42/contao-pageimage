@@ -155,18 +155,6 @@ class PageImage extends Frontend
             $arrOptions['order'] = Database::getInstance()->findInSet('id', $arrOrder);
         }
 
-        $arrJumpTo = array();
-        if ($objPage->pageImageJumpTo)
-        {
-            $objJumpTo = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")->limit(1)->execute($objPage->pageImageJumpTo);
-
-            if ($objJumpTo->numRows)
-            {
-                $arrJumpTo['title'] = $objPage->pageImageTitle ? $objPage->pageImageTitle : ($objJumpTo->pageTitle ? $objJumpTo->pageTitle : $objJumpTo->title);
-                $arrJumpTo['href'] = $this->generateFrontendUrl($objJumpTo->row());
-            }
-        }
-
         $arrImages = array();
         $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true), $arrOptions);
 
@@ -186,12 +174,16 @@ class PageImage extends Frontend
                 if ($arrMeta['title'] == '') {
                     $arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
                 }
+
+                $arrImage['alt'] = $objPage->pageImageAlt;
                 $arrImage['imageUrl'] = $arrMeta['link'];
                 $arrImage['caption'] = $arrMeta['caption'];
 
-                $arrImage['alt'] = $objPage->pageImageAlt;
-                $arrImage['title'] = $arrJumpTo['title'];
-                $arrImage['href'] = $arrJumpTo['href'];
+                if (null !== $objPage->getRelated('pageImageJumpTo')) {
+                    $arrImage['hasLink'] = true;
+                    $arrImage['title'] = ($objPage->pageImageTitle ?: ($arrMeta['title'] ?: ($objJumpTo->pageTitle ?: $objJumpTo->title)));
+                    $arrImage['href'] = $this->generateFrontendUrl($objPage->getRelated('pageImageJumpTo')->row());
+                }
 
                 $arrImages[] = $arrImage;
             }
