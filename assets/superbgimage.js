@@ -287,6 +287,10 @@ var SuperBGImage = new Class({
 		// get active image
 		var thisimg = this.container.getElement('img.activeslide');
 
+        if (!thisimg) {
+            return;
+        }
+
 		// calculate size and position
 		var dimensions = this.calcSize(thisimg.getSize().x, thisimg.getSize().y);
 		var newwidth = dimensions[0];
@@ -425,7 +429,7 @@ var SuperBGImage = new Class({
     					this.container.grab(img, 'top');
     				}
     				var thisimg = this.container.getFirst('img' + "[rel='" + this.imgActual + "']");
-    				var dimensions = this.calcSize(img.width, img.height);
+    				var dimensions = this.calcSize(img.getSize().x, img.getSize().y);
     				// perform the transition
     				this.transition(thisimg, dimensions);
     				// first image loaded?
