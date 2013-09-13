@@ -15,7 +15,7 @@
  * @copyright  terminal42 gmbh 2009-2013
  * @author     Andreas Schempp <andreas.schempp@terminal42.ch>
  * @author     Kamil Kuźmiński <kamil.kuzminski@terminal42.ch>
- * @license    LGPL
+ * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
 
@@ -73,20 +73,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_transition'] = array
     'inputType'		=> 'select',
     'options'       => array(0, 1),
     'reference'     => array(
-                            0   => 'none',
-                            1   => 'fade',
-                            2   => 'slide down',
-                            3   => 'slide left',
-                            4   => 'slide top',
-                            5   => 'slide right',
-                            6   => 'blind horizontal',
-                            7   => 'blind vertical',
-                            90  => 'slide right/left',
-                            91  => 'slide top/down'
+        0   => 'none',
+        1   => 'fade',
+        2   => 'slide down',
+        3   => 'slide left',
+        4   => 'slide top',
+        5   => 'slide right',
+        6   => 'blind horizontal',
+        7   => 'blind vertical',
+        90  => 'slide right/left',
+        91  => 'slide top/down'
     ),
     'default'       => 1,
     'eval'			=> array('mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
 );
-
-
-

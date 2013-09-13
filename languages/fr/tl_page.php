@@ -15,7 +15,7 @@
  * @copyright  terminal42 gmbh 2009-2013
  * @author     Andreas Schempp <andreas.schempp@terminal42.ch>
  * @author     Kamil Kuźmiński <kamil.kuzminski@terminal42.ch>
- * @license    LGPL
+ * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
 /**

@@ -7,9 +7,9 @@
 -- *                                                        *
 -- **********************************************************
 
--- 
+--
 -- Table `tl_page`
--- 
+--
 
 CREATE TABLE `tl_page` (
   `pageImage` blob NULL,
@@ -22,9 +22,9 @@ CREATE TABLE `tl_page` (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table `tl_module`
--- 
+--
 
 CREATE TABLE `tl_module` (
   `inheritPageImage` char(1) NOT NULL default '',
@@ -35,4 +35,3 @@ CREATE TABLE `tl_module` (
   `slider_transition` int(2) unsigned NOT NULL default '1',
   `slider_interval` int(10) unsigned NOT NULL default '0',
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
