@@ -197,24 +197,18 @@ class PageImage extends Frontend
             }
         }
 
-        if($blnMultipleImages) {
-
-            // number of elements limited
-            if(isset($intTotal) && $intTotal > 0) {
-
-                // specific index selected
-                if(isset($intIndex) && $intIndex > 0) {
+        if ($blnMultipleImages) {
+            if (isset($intTotal) && $intTotal > 0) {
+                if (isset($intIndex) && $intIndex > 0) {
                     return array_slice($arrImages, $intIndex, $intTotal);
                 } else {
                     return array_slice($arrImages, $intTotal);
                 }
             }
-
         } else {
             $intIndex = $intIndex < count($arrImages) ? $intIndex : 0;
             return $arrImages[$intIndex];
         }
-
 
 		return $arrImages;
 	}

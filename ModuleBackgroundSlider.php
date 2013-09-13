@@ -56,8 +56,7 @@ class ModuleBackgroundSlider extends Module
 
         $arrImages = $this->PageImage->getPageImage(true, $this->levelOffset, 0, $this->inheritPageImage);
 
-        if ($arrImages === false)
-        {
+        if ($arrImages === false) {
             return;
         }
 
@@ -69,7 +68,6 @@ class ModuleBackgroundSlider extends Module
             'slide_interval'    => $this->slider_interval,
             'speed'             => $this->slider_animationDuration,
             'randomimage'       => (int)$this->slider_randomOrder,
-
         );
     }
 }
