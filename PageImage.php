@@ -56,8 +56,7 @@ class PageImage extends Frontend
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(self::$objInstance))
-		{
+		if (!is_object(self::$objInstance)) {
 			self::$objInstance = new PageImage();
 		}
 
@@ -85,8 +84,7 @@ class PageImage extends Frontend
 			case 'pageimage_href':
 				$arrImage = $this->getPageImage(false, $arrTag[1]);
 
-				if ($arrImage === false)
-				{
+				if ($arrImage === false) {
 					return '';
 				}
 
@@ -106,29 +104,24 @@ class PageImage extends Frontend
 	 */
 	public function getPageImage($blnMultipleImages, $intIndex=0, $intTotal=null, $blnInherit=true)
 	{
-		$intIndex = (int)$intIndex;
+		$intIndex = (int) $intIndex;
 
-		if (is_null($this->arrCache[$intIndex]))
-		{
+		if (is_null($this->arrCache[$intIndex])) {
 			global $objPage;
 
 			$this->arrCache[$intIndex] = false;
 
 			// Current page has an image
-			if ($objPage->pageImage != '')
-			{
+			if ($objPage->pageImage != '') {
 				$this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
 			}
 
 			// Walk the trail
-			elseif ($blnInherit && count($objPage->trail))
-			{
+			elseif ($blnInherit && count($objPage->trail)) {
 				$objTrail = $this->Database->execute("SELECT * FROM tl_page WHERE id IN (" . implode(',', $objPage->trail) . ") ORDER BY id=" . implode(' DESC, id=', array_reverse($objPage->trail)) . " DESC");
 
-				while( $objTrail->next() )
-				{
-					if ($objTrail->pageImage != '')
-					{
+				while ($objTrail->next()) {
+					if ($objTrail->pageImage != '') {
 						$this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objTrail, $intIndex, $intTotal);
 						break;
 					}

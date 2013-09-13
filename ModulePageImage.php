@@ -48,8 +48,9 @@ class ModulePageImage extends Module
 
         $strBuffer = parent::generate();
 
-        if ($this->Template->src == '')
+        if ($this->Template->src == '') {
             return '';
+        }
 
         return $strBuffer;
     }
@@ -59,8 +60,7 @@ class ModulePageImage extends Module
     {
         $arrImage = $this->PageImage->getPageImage(false, $this->levelOffset, null, $this->inheritPageImage);
 
-        if ($arrImage === false)
-        {
+        if ($arrImage === false) {
             return;
         }
 
@@ -69,8 +69,7 @@ class ModulePageImage extends Module
 
         $this->Template->setData($arrImage);
 
-        if (($imgSize = @getimagesize(TL_ROOT . '/' . $arrImage['path'])) !== false)
-        {
+        if (($imgSize = @getimagesize(TL_ROOT . '/' . $arrImage['path'])) !== false) {
             $this->Template->size = ' ' . $imgSize[3];
         }
     }
