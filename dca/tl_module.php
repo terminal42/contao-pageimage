@@ -31,46 +31,45 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundSlider'] = '{title_legend
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = array
 (
-    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
-    'inputType'		=> 'checkbox',
-    'eval'			=> array('tl_class'=>'w50 m12'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
+    'inputType'     => 'checkbox',
+    'eval'          => array('tl_class'=>'w50 m12'),
 );
-
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_autostart'] = array
 (
-    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['slider_autostart'],
-    'inputType'		=> 'checkbox',
-    'eval'			=> array('tl_class'=>'w50 m12'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_autostart'],
+    'inputType'     => 'checkbox',
+    'eval'          => array('tl_class'=>'w50 m12'),
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_randomOrder'] = array
 (
-    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['slider_randomOrder'],
-    'inputType'		=> 'checkbox',
-    'eval'			=> array('tl_class'=>'w50 m12'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_randomOrder'],
+    'inputType'     => 'checkbox',
+    'eval'          => array('tl_class'=>'w50 m12'),
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_interval'] = array
 (
-    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['slider_interval'],
-    'inputType'		=> 'text',
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_interval'],
+    'inputType'     => 'text',
     'default'       => 5000,
-    'eval'			=> array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
+    'eval'          => array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_animationDuration'] = array
 (
-    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['slider_animationDuration'],
-    'inputType'		=> 'text',
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_animationDuration'],
+    'inputType'     => 'text',
     'default'       => 600,
-    'eval'			=> array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
+    'eval'          => array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_transition'] = array
 (
-    'label'			=> &$GLOBALS['TL_LANG']['tl_module']['slider_transition'],
-    'inputType'		=> 'select',
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_transition'],
+    'inputType'     => 'select',
     'options'       => array(0, 1),
     'reference'     => array(
         0   => 'none',
@@ -85,5 +84,5 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_transition'] = array
         91  => 'slide top/down'
     ),
     'default'       => 1,
-    'eval'			=> array('mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
+    'eval'          => array('mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
 );

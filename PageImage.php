@@ -178,14 +178,12 @@ class PageImage extends Frontend
                 if (!$objFile->isGdImage) {
                     continue;
                 }
+
                 $arrImage = $objImages->row();
-
-
                 $arrMeta = $this->getMetaData($objImages->meta, $objPage->language);
 
                 // Use the file name as title if none is given
-                if ($arrMeta['title'] == '')
-                {
+                if ($arrMeta['title'] == '') {
                     $arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
                 }
                 $arrImage['imageUrl'] = $arrMeta['link'];
@@ -220,6 +218,4 @@ class PageImage extends Frontend
 
 		return $arrImages;
 	}
-
 }
-

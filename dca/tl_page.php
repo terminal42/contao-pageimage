@@ -22,12 +22,13 @@
 /**
  * Palettes
  */
-foreach( $GLOBALS['TL_DCA']['tl_page']['palettes'] as $name => $palette )
+foreach ($GLOBALS['TL_DCA']['tl_page']['palettes'] as $name => $palette)
 {
-	if ($name == '__selector__')
-		continue;
+    if ($name == '__selector__') {
+        continue;
+    }
 
-	$GLOBALS['TL_DCA']['tl_page']['palettes'][$name] = str_replace('{meta_legend}', '{image_legend:hide},pageImage,pageImageJumpTo,pageImageAlt,pageImageTitle;{meta_legend}', $palette);
+    $GLOBALS['TL_DCA']['tl_page']['palettes'][$name] = str_replace('{meta_legend}', '{image_legend:hide},pageImage,pageImageJumpTo,pageImageAlt,pageImageTitle;{meta_legend}', $palette);
     $GLOBALS['TL_DCA']['tl_page']['fields']['type']['eval']['gallery_types'][] = $name;
 }
 
@@ -37,10 +38,10 @@ foreach( $GLOBALS['TL_DCA']['tl_page']['palettes'] as $name => $palette )
  */
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = array
 (
-	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
-	'inputType'		=> 'fileTree',
-	'exclude'		=> true,
-	'eval'			=> array('fieldType'=>'checkbox', 'orderField'=>'pageImageOrder', 'multiple'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png', 'gallery_types'=>array('gallery')),
+    'label'         => &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
+    'inputType'     => 'fileTree',
+    'exclude'       => true,
+    'eval'          => array('fieldType'=>'checkbox', 'orderField'=>'pageImageOrder', 'multiple'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png', 'gallery_types'=>array('gallery')),
 );
 
 // field is used to store the order of the list of images in pageImage
@@ -50,25 +51,25 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageOrder'] = array
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageJumpTo'] = array
 (
-	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImageJumpTo'],
-	'inputType'		=> 'pageTree',
-	'exclude'		=> true,
-	'eval'			=> array('fieldType'=>'radio'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_page']['pageImageJumpTo'],
+    'exclude'       => true,
+    'inputType'     => 'pageTree',
+    'eval'          => array('fieldType'=>'radio'),
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageAlt'] = array
 (
-	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImageAlt'],
-	'inputType'		=> 'text',
-	'exclude'		=> true,
-	'eval'			=> array('maxlength'=>255, 'tl_class'=>'w50'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_page']['pageImageAlt'],
+    'inputType'     => 'text',
+    'exclude'       => true,
+    'eval'          => array('maxlength'=>255, 'tl_class'=>'w50'),
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageTitle'] = array
 (
-	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImageTitle'],
-	'inputType'		=> 'text',
-	'exclude'		=> true,
-	'eval'			=> array('maxlength'=>255, 'tl_class'=>'w50'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_page']['pageImageTitle'],
+    'inputType'     => 'text',
+    'exclude'       => true,
+    'eval'          => array('maxlength'=>255, 'tl_class'=>'w50'),
 );
 
