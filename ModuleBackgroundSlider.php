@@ -14,6 +14,7 @@
  * PHP version 5
  * @copyright  terminal42 gmbh 2009-2013
  * @author     Jan Reuteler <jan.reuteler@terminal42.ch>
+ * @author     Andreas Schempp <andreas.schempp@terminal42.ch>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  */
 
@@ -51,14 +52,9 @@ class ModuleBackgroundSlider extends Module
 
     protected function compile()
     {
-        global $objPage;
         $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/pageimage/assets/superbgimage.min.js';
 
         $arrImages = $this->PageImage->getPageImage(true, $this->levelOffset, 0, $this->inheritPageImage);
-
-        if ($arrImages === false) {
-            return;
-        }
 
         $this->Template->images = $arrImages;
         $this->Template->settings = array(
