@@ -29,9 +29,16 @@ class PageImage extends Frontend
     protected static $objInstance;
 
     /**
-     * Cache
+     * Images
+     * @var array
      */
-	protected $arrCache = null;
+    protected $arrImages;
+
+    /**
+     * Image has been inherited
+     * @var bool
+     */
+    protected $blnInherited;
 
 
     /**
@@ -46,6 +53,31 @@ class PageImage extends Frontend
     protected function __construct()
     {
         parent::__construct();
+
+        global $objPage;
+
+        // Current page has an image
+        if ($objPage->pageImage != '') {
+            $this->arrImages = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
+            $this->blnInherited = false;
+        }
+
+        // Walk the trail
+        else {
+            $this->arrImages = array();
+            $this->blnInherited = true;
+
+            $objTrail = \PageModel::findMultipleByIds($objPage->trail, array('order'=>Database::getInstance()->findInSet('id', array_reverse($objPage->trail))));
+
+            if (null !== $objTrail) {
+                while ($objTrail->next()) {
+                    if ($objTrail->pageImage != '') {
+                        $this->arrImages = $this->parsePage($blnMultipleImages, $objTrail, $intIndex, $intTotal);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -82,13 +114,11 @@ class PageImage extends Frontend
             case 'pageimage_alt':
             case 'pageimage_title':
             case 'pageimage_href':
-                $arrImage = $this->getPageImage(false, $arrTag[1]);
-
-                if ($arrImage === false) {
+                if (!isset($this->arrImages[$arrTag[1]])) {
                     return '';
                 }
 
-                return $arrImage[str_replace('pageimage_', '', $arrTag[0])];
+                return $this->arrImages[$arrTag[1]][str_replace('pageimage_', '', $arrTag[0])];
         }
 
         return false;
@@ -105,30 +135,28 @@ class PageImage extends Frontend
     {
         $intIndex = (int) $intIndex;
 
-        if (null === $this->arrCache) {
+        if (null === $this->arrImages) {
             global $objPage;
-
-			$this->arrCache[$intIndex] = false;
 
             // Current page has an image
             if ($objPage->pageImage != '') {
-                $this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
+                $this->arrImages[$intIndex] = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
             }
 
             // Walk the trail
             elseif ($blnInherit && count($objPage->trail)) {
-				$objTrail = $this->Database->execute("SELECT * FROM tl_page WHERE id IN (" . implode(',', $objPage->trail) . ") ORDER BY id=" . implode(' DESC, id=', array_reverse($objPage->trail)) . " DESC");
+                $objTrail = \Database::getInstance()->execute("SELECT * FROM tl_page WHERE id IN (" . implode(',', $objPage->trail) . ") ORDER BY id=" . implode(' DESC, id=', array_reverse($objPage->trail)) . " DESC");
 
                 while ($objTrail->next()) {
                     if ($objTrail->pageImage != '') {
-                        $this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objTrail, $intIndex, $intTotal);
+                        $this->arrImages[$intIndex] = $this->parsePage($blnMultipleImages, $objTrail, $intIndex, $intTotal);
                         break;
                     }
                 }
             }
         }
 
-        return $this->arrCache[$intIndex];
+        return $this->arrImages[$intIndex];
     }
 
 
