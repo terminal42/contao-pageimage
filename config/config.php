@@ -23,4 +23,11 @@
  * Frontend modules
  */
 $GLOBALS['FE_MOD']['miscellaneous']['pageImage'] = 'ModulePageImage';
+$GLOBALS['FE_MOD']['miscellaneous']['backgroundSlider'] = 'ModuleBackgroundSlider';
+
+
+/**
+ * Hooks
+ */
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('PageImage', 'replaceTags');
 

@@ -28,6 +28,7 @@ foreach( $GLOBALS['TL_DCA']['tl_page']['palettes'] as $name => $palette )
 		continue;
 
 	$GLOBALS['TL_DCA']['tl_page']['palettes'][$name] = str_replace('{meta_legend}', '{image_legend:hide},pageImage,pageImageJumpTo,pageImageAlt,pageImageTitle;{meta_legend}', $palette);
+    $GLOBALS['TL_DCA']['tl_page']['fields']['type']['eval']['gallery_types'][] = $name;
 }
 
 
@@ -39,7 +40,12 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = array
 	'label'			=> &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
 	'inputType'		=> 'fileTree',
 	'exclude'		=> true,
-	'eval'			=> array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png'),
+	'eval'			=> array('fieldType'=>'checkbox', 'orderField'=>'pageImageOrder', 'multiple'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png', 'gallery_types'=>array('gallery')),
+);
+
+// field is used to store the order of the list of images in pageImage
+$GLOBALS['TL_DCA']['tl_page']['fields']['pageImageOrder'] = array
+(
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageJumpTo'] = array
