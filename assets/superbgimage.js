@@ -53,7 +53,7 @@ var SuperBGImage = new Class({
 			this.container = new Element('div', {id: this.options.id});
 		}
 
-		document.body.grab(this.container, 'top');
+		document.id(document.body).grab(this.container, 'top');
 
 		// set required css options
 		this.container.setStyles({'display':'none', 'overflow':'hidden', 'z-index':this.options.z_index});
