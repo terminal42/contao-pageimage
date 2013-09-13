@@ -34,13 +34,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = array
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
+    'sql'           => "char(1) NOT NULL default ''",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_autostart'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_autostart'],
+    'default'       => '1',
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
+    'sql'           => "char(1) NOT NULL default ''",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_randomOrder'] = array
@@ -48,14 +51,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_randomOrder'] = array
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_randomOrder'],
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
+    'sql'           => "char(1) NOT NULL default ''",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_interval'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['slider_interval'],
+    'default'       => '5000',
     'inputType'     => 'text',
-    'default'       => 5000,
     'eval'          => array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
+    'sql'           => "int(6) unsigned NOT NULL default '0'",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_animationDuration'] = array
@@ -64,6 +69,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_animationDuration'] = array
     'inputType'     => 'text',
     'default'       => 600,
     'eval'          => array('rgxp'=>'digit', 'mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
+    'sql'           => "int(6) unsigned NOT NULL default '0'",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['slider_transition'] = array
@@ -85,4 +91,5 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['slider_transition'] = array
     ),
     'default'       => 1,
     'eval'          => array('mandatory'=>true, 'maxlength'=>6, 'tl_class'=>'w50'),
+    'sql'           => "int(2) unsigned NOT NULL default '0'",
 );
