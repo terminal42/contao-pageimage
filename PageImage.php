@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -82,13 +82,13 @@ class PageImage extends Frontend
 	public function replaceTags($strTag)
 	{
 		$arrTag = trimsplit('::', $strTag);
-		
+
 		switch($arrTag[0])
 		{
 			case 'pageimage':
 				$arrTag[0] = 'pageimage_src';
 				// Do NOT add a break;
-				
+
 			case 'pageimage_alt':
 			case 'pageimage_title':
 			case 'pageimage_href':
@@ -98,9 +98,9 @@ class PageImage extends Frontend
 				{
 					return '';
 				}
-			
+
 				return $arrImage[str_replace('pageimage_', '', $arrTag[0])];
-			
+
 			default:
 				return false;
 		}
@@ -116,24 +116,24 @@ class PageImage extends Frontend
 	public function getPageImage($blnMultipleImages, $intIndex=0, $intTotal=null, $blnInherit=true)
 	{
 		$intIndex = (int)$intIndex;
-		
+
 		if (is_null($this->arrCache[$intIndex]))
 		{
 			global $objPage;
-			
+
 			$this->arrCache[$intIndex] = false;
-			
+
 			// Current page has an image
 			if ($objPage->pageImage != '')
 			{
 				$this->arrCache[$intIndex] = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
 			}
-			
+
 			// Walk the trail
 			elseif ($blnInherit && count($objPage->trail))
 			{
 				$objTrail = $this->Database->execute("SELECT * FROM tl_page WHERE id IN (" . implode(',', $objPage->trail) . ") ORDER BY id=" . implode(' DESC, id=', array_reverse($objPage->trail)) . " DESC");
-				
+
 				while( $objTrail->next() )
 				{
 					if ($objTrail->pageImage != '')
@@ -144,7 +144,7 @@ class PageImage extends Frontend
 				}
 			}
 		}
-		
+
 		return $this->arrCache[$intIndex];
 	}
 
