@@ -58,7 +58,7 @@ class PageImage extends Frontend
 
         // Current page has an image
         if ($objPage->pageImage != '') {
-            $this->arrImages = $this->parsePage($blnMultipleImages, $objPage, $intIndex, $intTotal);
+            $this->arrImages = $this->parsePage($objPage, $intIndex, $intTotal);
             $this->blnInherited = false;
         }
 
@@ -72,7 +72,7 @@ class PageImage extends Frontend
             if (null !== $objTrail) {
                 while ($objTrail->next()) {
                     if ($objTrail->pageImage != '') {
-                        $this->arrImages = $this->parsePage($blnMultipleImages, $objTrail, $intIndex, $intTotal);
+                        $this->arrImages = $this->parsePage($objTrail, $intIndex, $intTotal);
                         break;
                     }
                 }
@@ -83,7 +83,6 @@ class PageImage extends Frontend
 
     /**
      * Instantiate the class
-     *
      * @return object
      */
     public static function getInstance()
@@ -94,7 +93,6 @@ class PageImage extends Frontend
 
         return self::$objInstance;
     }
-
 
     /**
      * Replace "pageimage" inserttag
@@ -124,6 +122,40 @@ class PageImage extends Frontend
         return false;
     }
 
+    /**
+     * Get one image by offset
+     * @param   int
+     * @param   bool
+     * @return  array|null
+     */
+    public function getOne($intIndex=0, $blnInherit=true)
+    {
+        if ($this->blnInherited && !$blnInherit) {
+            return null;
+        }
+
+        if (!isset($this->arrImages[$intIndex])) {
+            return null;
+        }
+
+        return $this->arrImages[$intIndex];
+    }
+
+    /**
+     * Get multiple images by offset and length
+     * @param   int
+     * @param   int|null
+     * @param   bool
+     * @return  array
+     */
+    public function getMultiple($intOffset=0, $intLength=null, $blnInherit=true)
+    {
+        if ($this->blnInherited && !$blnInherit) {
+            return null;
+        }
+
+        return array_slice($this->arrImages, $intOffset, $intLength);
+    }
 
     /**
      * Search for the current page image
@@ -159,14 +191,13 @@ class PageImage extends Frontend
         return $this->arrImages[$intIndex];
     }
 
-
     /**
      * Parse the given page and return the image information
      * @param    Database_Result
      * @param    int
      * @return    array
      */
-    protected function parsePage($blnMultipleImages, $objPage, $intIndex = null, $intTotal = null)
+    protected function parsePage($objPage, $intIndex = null, $intTotal = null)
     {
         $arrOptions = array();
         $arrOrder = array_filter(explode(',', $objPage->pageImageOrder));
@@ -207,19 +238,6 @@ class PageImage extends Frontend
 
                 $arrImages[] = $arrImage;
             }
-        }
-
-        if ($blnMultipleImages) {
-            if (isset($intTotal) && $intTotal > 0) {
-                if (isset($intIndex) && $intIndex > 0) {
-                    return array_slice($arrImages, $intIndex, $intTotal);
-                } else {
-                    return array_slice($arrImages, $intTotal);
-                }
-            }
-        } else {
-            $intIndex = $intIndex < count($arrImages) ? $intIndex : 0;
-            return $arrImages[$intIndex];
         }
 
         return $arrImages;

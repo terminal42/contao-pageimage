@@ -44,8 +44,6 @@ class ModulePageImage extends Module
             return $objTemplate->parse();
         }
 
-        $this->import('PageImage');
-
         $strBuffer = parent::generate();
 
         if ($this->Template->src == '') {
@@ -58,7 +56,7 @@ class ModulePageImage extends Module
 
     protected function compile()
     {
-        $arrImage = $this->PageImage->getPageImage(false, $this->levelOffset, null, $this->inheritPageImage);
+        $arrImage = PageImage::getInstance()->getOne($this->levelOffset, $this->inheritPageImage);
 
         if ($arrImage === false) {
             return;

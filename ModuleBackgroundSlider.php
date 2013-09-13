@@ -44,8 +44,6 @@ class ModuleBackgroundSlider extends Module
             return $objTemplate->parse();
         }
 
-        $this->import('PageImage');
-
         return parent::generate();
     }
 
@@ -54,7 +52,7 @@ class ModuleBackgroundSlider extends Module
     {
         $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/pageimage/assets/superbgimage.min.js';
 
-        $arrImages = $this->PageImage->getPageImage(true, $this->levelOffset, 0, $this->inheritPageImage);
+        $arrImages = PageImage::getInstance()->getMultiple($this->levelOffset, ($this->showLevel ?: null), $this->inheritPageImage);
 
         $this->Template->images = $arrImages;
         $this->Template->settings = array(
