@@ -11,7 +11,6 @@
 new SuperBGImage(document.id('pageimage<?php echo $this->id; ?>'),
     {
         slideshow: <?php echo $this->settings['slideshow']; ?>,
-        showimage: <?php echo $this->settings['showimage']; ?>,
         transition: <?php echo $this->settings['transition']; ?>,
         randomimage: <?php echo $this->settings['randomimage']; ?>,
         slide_interval: <?php echo $this->settings['slide_interval']; ?>,

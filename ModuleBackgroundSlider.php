@@ -63,7 +63,6 @@ class ModuleBackgroundSlider extends Module
         $this->Template->images = $arrImages;
         $this->Template->settings = array(
             'slideshow'         => (count($arrImages) > 1 ? $this->slider_autostart : 0),
-            'showimage'         => ($this->levelOffset+1),
             'transition'        => $this->slider_transition,
             'slide_interval'    => $this->slider_interval,
             'speed'             => $this->slider_animationDuration,
