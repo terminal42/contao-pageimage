@@ -11,6 +11,8 @@ var SuperBGImage = new Class({
         showimage: 1, // number of first image to display
         vertical_center: 1, // 0-align top, 1-center vertical
         horizontal_center: 1, // 0-align left, 1-center horizontally
+        min_width: 0, // minimum image width
+        min_height: 0, // minimum image height
         transition: 1, // 0-none, 1-fade, 2-slide down, 3-slide left, 4-slide top, 5-slide right, 6-blind horizontal, 7-blind vertical, 90-slide right/left, 91-slide top/down
         transitionout: 1, // 0-no transition for previous image, 1-transition for previous image
         randomtransition: 0, // 0-none, 1-use random transition (0-7)
@@ -336,6 +338,13 @@ var SuperBGImage = new Class({
 		// calculate ratio
 		var ratio = imgh / imgw;
 
+		if (this.options.min_width > 0 && this.options.min_width >= browserwidth) {
+    		browserwidth = this.options.min_width;
+		}
+		if (this.options.min_height > 0 && this.options.min_height >= browserheight) {
+            browserheight = this.options.min_height;
+		}
+
 		// calculate new size
 		if ((browserheight / browserwidth) > ratio) {
 			newheight = browserheight;
@@ -373,9 +382,9 @@ var SuperBGImage = new Class({
 
 		// get source and title from link
 		var imgsrc = ''; var imgtitle = '';
-		if (this.container.getChildren('img' + "[rel='" + this.imgActual + "']").length === 0) {
-			imgsrc = this.element.getFirst('a' + "[rel='" + this.imgActual + "']").get('href');
-			imgtitle = this.element.getFirst('a' + "[rel='" + this.imgActual + "']").get('title');
+		if (this.container.getElements('img' + "[rel='" + this.imgActual + "']").length === 0) {
+			imgsrc = this.element.getElement('a' + "[rel='" + this.imgActual + "']").get('href');
+			imgtitle = this.element.getElement('a' + "[rel='" + this.imgActual + "']").get('title');
 		// otherwise get source from image
 		} else {
 			imgsrc = this.container.getFirst('img' + "[rel='" + this.imgActual + "']").get('src');
