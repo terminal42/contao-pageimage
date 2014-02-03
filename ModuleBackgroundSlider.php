@@ -43,7 +43,7 @@ class ModuleBackgroundSlider extends Module
     {
         $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/pageimage/assets/superbgimage.min.js';
 
-        $arrImages = PageImage::getInstance()->getMultiple($this->levelOffset, ($this->showLevel ?: null), $this->inheritPageImage);
+        $arrImages = PageImage::getMultiple($this->levelOffset, ($this->showLevel ?: null), $this->inheritPageImage);
 
         $this->Template->images = $arrImages;
         $this->Template->slideshow         = (count($arrImages) > 1 ? $this->slider_autostart : 0);

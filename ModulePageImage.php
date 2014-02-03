@@ -47,7 +47,7 @@ class ModulePageImage extends Module
 
     protected function compile()
     {
-        $arrImage = PageImage::getInstance()->getOne($this->levelOffset, $this->inheritPageImage);
+        $arrImage = PageImage::getOne($this->levelOffset, $this->inheritPageImage);
 
         if ($arrImage === false) {
             return;
