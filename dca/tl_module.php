@@ -1,27 +1,18 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2010 Leo Feyer
+ * pageimage Extension for Contao Open Source CMS
  *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- *
- * PHP version 5
- * @copyright  terminal42 gmbh 2009-2013
- * @author     Andreas Schempp <andreas.schempp@terminal42.ch>
- * @author     Kamil Kuźmiński <kamil.kuzminski@terminal42.ch>
- * @license    http://opensource.org/licenses/lgpl-3.0.html
+ * @copyright  Copyright (c) 2009-2014, terminal42 gmbh
+ * @author     terminal42 gmbh <info@terminal42.ch>
+ * @license    http://opensource.org/licenses/lgpl-3.0.html LGPL
+ * @link       http://github.com/terminal42/contao-pageimage
  */
 
 
 /**
-* Palettes
-*/
+ * Palettes
+ */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage,levelOffset;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundSlider'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage;levelOffset,showLevel,slider_transition,slider_autostart,slider_randomOrder,slider_interval,slider_animationDuration;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
