@@ -17,7 +17,7 @@ class ImagePageUpgrade
     {
         if (version_compare(VERSION, '3.2', '>=') && \Database::getInstance()->fieldExists('pageImage', 'tl_page'))
         {
-            \Database\Updater::convertSingleField('tl_page', 'pageImage');
+            \Database\Updater::convertMultiField('tl_page', 'pageImage');
         }
     }
 }
