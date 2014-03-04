@@ -58,7 +58,7 @@ class ModulePageImage extends Module
 
         $this->Template->setData($arrImage);
 
-        if (($imgSize = @getimagesize(TL_ROOT . '/' . $arrImage['path'])) !== false) {
+        if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($arrImage['src']))) !== false) {
             $this->Template->size = ' ' . $imgSize[3];
         }
     }
