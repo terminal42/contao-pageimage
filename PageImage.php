@@ -172,15 +172,8 @@ class PageImage extends Frontend
      */
     protected static function parsePage($objPage, $intIndex = null, $intTotal = null)
     {
-        $arrOptions = array();
-        $arrOrder = array_filter(explode(',', $objPage->pageImageOrder));
-
-        if (!empty($arrOrder)) {
-            $arrOptions['order'] = Database::getInstance()->findInSet('id', $arrOrder);
-        }
-
         $arrImages = array();
-        $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true), $arrOptions);
+        $objImages = \FilesModel::findMultipleByIds(deserialize($objPage->pageImage, true));
 
         if (null !== $objImages) {
             while ($objImages->next()) {
@@ -210,6 +203,34 @@ class PageImage extends Frontend
                 }
 
                 $arrImages[] = $arrImage;
+            }
+
+            $arrOrder = deserialize($objPage->pageImageOrder);
+
+            if (!empty($arrOrder) && is_array($arrOrder))
+            {
+            	// Remove all values
+            	$arrOrder = array_map(function(){}, array_flip($arrOrder));
+
+            	// Move the matching elements to their position in $arrOrder
+            	foreach ($arrImages as $k=>$v)
+            	{
+            		if (array_key_exists($v['uuid'], $arrOrder))
+            		{
+            			$arrOrder[$v['uuid']] = $v;
+            			unset($arrImages[$k]);
+            		}
+            	}
+
+            	// Append the left-over images at the end
+            	if (!empty($arrImages))
+            	{
+            		$arrOrder = array_merge($arrOrder, array_values($arrImages));
+            	}
+
+            	// Remove empty (unreplaced) entries
+            	$arrImages = array_values(array_filter($arrOrder));
+            	unset($arrOrder);
             }
         }
 
