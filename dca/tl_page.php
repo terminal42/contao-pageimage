@@ -39,7 +39,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = array
 // field is used to store the order of the list of images in pageImage
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageOrder'] = array
 (
-    'sql'           => "text NULL",
+    'sql'           => "blob NULL",
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['pageImageJumpTo'] = array
