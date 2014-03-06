@@ -14,6 +14,7 @@
  * Frontend modules
  */
 $GLOBALS['FE_MOD']['miscellaneous']['pageImage']        = 'ModulePageImage';
+$GLOBALS['FE_MOD']['miscellaneous']['backgroundImage']  = 'ModuleBackgroundImage';
 
 /**
  * Hooks

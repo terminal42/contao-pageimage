@@ -16,6 +16,7 @@
 ClassLoader::addClasses(array
 (
 	'ModulePageImage'           => 'system/modules/pageimage/ModulePageImage.php',
+    'ModuleBackgroundImage'     => 'system/modules/pageimage/ModuleBackgroundImage.php',
     'PageImage'                 => 'system/modules/pageimage/PageImage.php',
 ));
 
@@ -25,4 +26,5 @@ ClassLoader::addClasses(array
 TemplateLoader::addFiles(array
 (
 	'mod_pageimage'             => 'system/modules/pageimage/templates',
+    'mod_background_image'      => 'system/modules/pageimage/templates',
 ));
