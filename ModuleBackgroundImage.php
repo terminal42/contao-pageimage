@@ -35,7 +35,15 @@ class ModuleBackgroundImage extends ModulePageImage
             return $objTemplate->parse();
         }
 
-        return parent::generate();
+        $strBuffer = parent::generate();
+
+        if ($strBuffer == '') {
+            return '';
+        } elseif ($this->Template->useCss) {
+            $GLOBALS['TL_HEAD'][] = $strBuffer;
+        } else {
+            $GLOBALS['TL_BODY'][] = $strBuffer;
+        }
     }
 
 

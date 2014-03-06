@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 <?php if ($this->useCss): ?>
 <style>
 html {
@@ -9,8 +8,6 @@ html {
   background-size: cover;
 }
 </style>
-<?php // Add style tag to header instead of body ?>
-<?php $GLOBALS['TL_HEAD'][] = ob_get_clean(); ?>
 <?php else: ?>
 <script>
 (function (window, document){
@@ -77,6 +74,4 @@ html {
 }(window, document));
 
 </script>
-<?php // Add script tag to end of body ?>
-<?php $GLOBALS['TL_BODY'][] = ob_get_clean(); ?>
 <?php endif; ?>
