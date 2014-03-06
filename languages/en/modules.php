@@ -19,4 +19,3 @@ $GLOBALS['TL_LANG']['MOD']['pageImage']         = array('Page Image', '');
  * Frontend modules
  */
 $GLOBALS['TL_LANG']['FMD']['pageImage']         = array('Page Image', 'Allows you to set an image for each page and display it in the frontend. Images can be inherit from parent pages.');
-$GLOBALS['TL_LANG']['FMD']['backgroundSlider']  = array('Background Slider', 'Allows you to use the pageimage(s) as a background and slide between them');
