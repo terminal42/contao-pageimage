@@ -47,7 +47,16 @@ class ModulePageImage extends Module
 
     protected function compile()
     {
+        if ($this->defineRoot) {
+            $objPage = \PageModel::findByPk($this->rootPage);
+        } else {
             global $objPage;
+        }
+
+        if (null === $objPage) {
+            return;
+        }
+
         $arrImage = PageImage::getOne($objPage, (int) $this->levelOffset, (bool) $this->inheritPageImage);
 
         if (null === $arrImage) {
