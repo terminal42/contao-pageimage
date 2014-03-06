@@ -18,4 +18,5 @@ $GLOBALS['TL_LANG']['MOD']['pageImage'] = array('Page Image', '');
 /**
  * Frontend modules
  */
-$GLOBALS['TL_LANG']['FMD']['pageImage']	= array('Page Image', 'Permet de définir une image pour chaque page et de l\'afficher dans le front-office. Les images peuvent être héritées des pages parents.');
+$GLOBALS['TL_LANG']['FMD']['pageImage']	      = array('Page Image', 'Permet de définir une image pour chaque page et de l\'afficher dans le front office. Les images peuvent être héritées des pages parentes.');
+$GLOBALS['TL_LANG']['FMD']['backgroundImage'] = array('Image de fond', 'Vous permet d\'utiliser une image de fond en plein écran.');
