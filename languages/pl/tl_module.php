@@ -1,21 +1,12 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2010 Leo Feyer
+ * pageimage Extension for Contao Open Source CMS
  *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- *
- * PHP version 5
- * @copyright  terminal42 gmbh 2009-2013
- * @author     Andreas Schempp <andreas.schempp@terminal42.ch>
- * @author     Kamil Kuźmiński <kamil.kuzminski@terminal42.ch>
- * @license    LGPL
+ * @copyright  Copyright (c) 2009-2014, terminal42 gmbh
+ * @author     terminal42 gmbh <info@terminal42.ch>
+ * @license    http://opensource.org/licenses/lgpl-3.0.html LGPL
+ * @link       http://github.com/terminal42/contao-pageimage
  */
 
 
@@ -23,4 +14,3 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['inheritPageImage'] = array('Użyj obrazka nadrzędnego', 'Użyj obrazka strony nadrzędnej, jeśli nie ma ustawionego obrazka dla aktywnej strony.');
-

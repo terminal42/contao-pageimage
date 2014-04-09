@@ -1,28 +1,20 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * Copyright (C) 2005-2010 Leo Feyer
+ * pageimage Extension for Contao Open Source CMS
  *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- *
- * PHP version 5
- * @copyright  terminal42 gmbh 2009-2013
- * @author     Andreas Schempp <andreas.schempp@terminal42.ch>
- * @author     Kamil Kuźmiński <kamil.kuzminski@terminal42.ch>
- * @license    LGPL
+ * @copyright  Copyright (c) 2009-2014, terminal42 gmbh
+ * @author     terminal42 gmbh <info@terminal42.ch>
+ * @license    http://opensource.org/licenses/lgpl-3.0.html LGPL
+ * @link       http://github.com/terminal42/contao-pageimage
  */
 
 
 /**
  * Palettes
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage,levelOffset;{redirect_legend},defineRoot;;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundImage'] = '{title_legend},name,type;{config_legend},imgSize,inheritPageImage,levelOffset;{redirect_legend},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -30,8 +22,9 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,
  */
 $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = array
 (
-	'label'			=> &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
-	'inputType'		=> 'checkbox',
-	'eval'			=> array('tl_class'=>'w50 m12'),
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
+    'exclude'       => true,
+    'inputType'     => 'checkbox',
+    'eval'          => array('tl_class'=>'w50 m12'),
+    'sql'           => "char(1) NOT NULL default ''",
 );
-
