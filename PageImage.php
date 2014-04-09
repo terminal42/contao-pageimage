@@ -77,7 +77,7 @@ class PageImage extends Frontend
      * @param   bool
      * @return  array
      */
-    public static function getMultiple($intOffset=0, $intLength=null, $blnInherit=true)
+    public static function getMultiple(\PageModel $objPage, $intOffset=0, $intLength=null, $blnInherit=true)
     {
         $arrImages = static::findForPage($objPage, $blnInherit);
 
@@ -112,7 +112,7 @@ class PageImage extends Frontend
             // Walk the trail
             else {
                 $objPage->loadDetails();
-                $objTrails = \PageModel::findMultipleByIds($objPage->trail, array('order'=>\Database::getInstance()->findInSet('id', array_reverse($objPage->trail))));
+                $objTrails = \PageModel::findMultipleByIds(array_reverse($objPage->trail));
 
                 if (null !== $objTrails) {
                     foreach ($objTrails as $objTrail) {
