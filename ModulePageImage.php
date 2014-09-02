@@ -57,7 +57,14 @@ class ModulePageImage extends Module
             return;
         }
 
-        $arrImage = PageImage::getOne($objPage, (int) $this->levelOffset, (bool) $this->inheritPageImage);
+        $intOffset = (int) $this->levelOffset;
+
+        // Random image
+        if ($this->randomPageImage) {
+            $intOffset = -1;
+        }
+
+        $arrImage = PageImage::getOne($objPage, $intOffset, (bool) $this->inheritPageImage);
 
         if (null === $arrImage) {
             return;

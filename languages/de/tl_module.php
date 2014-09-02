@@ -14,3 +14,5 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['inheritPageImage'] = array('Übergeordnete Bilder verwenden', 'Falls der aktuellen Seite kein Bild zugeordnet ist, wird das Bild der übergeordneten Seite verwendet.');
+$GLOBALS['TL_LANG']['tl_module']['randomPageImage']  = array('Zufälliges Bild', 'Ein zufälliges Bild anzeigen.');
+

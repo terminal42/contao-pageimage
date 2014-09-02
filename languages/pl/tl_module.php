@@ -14,3 +14,4 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['inheritPageImage'] = array('Użyj obrazka nadrzędnego', 'Użyj obrazka strony nadrzędnej, jeśli nie ma ustawionego obrazka dla aktywnej strony.');
+$GLOBALS['TL_LANG']['tl_module']['randomPageImage']  = array('Losowy obrazek', 'Wyświetl jeden losowy obrazek.');

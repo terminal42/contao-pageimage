@@ -13,8 +13,8 @@
 /**
  * Palettes
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage,levelOffset;{redirect_legend},defineRoot;;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundImage'] = '{title_legend},name,type;{config_legend},imgSize,inheritPageImage,levelOffset;{redirect_legend},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['pageImage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage,levelOffset,randomPageImage;{redirect_legend},defineRoot;;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundImage'] = '{title_legend},name,type;{config_legend},imgSize,inheritPageImage,levelOffset,randomPageImage;{redirect_legend},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -23,6 +23,15 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['backgroundImage'] = '{title_legend}
 $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = array
 (
     'label'         => &$GLOBALS['TL_LANG']['tl_module']['inheritPageImage'],
+    'exclude'       => true,
+    'inputType'     => 'checkbox',
+    'eval'          => array('tl_class'=>'w50 m12'),
+    'sql'           => "char(1) NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['randomPageImage'] = array
+(
+    'label'         => &$GLOBALS['TL_LANG']['tl_module']['randomPageImage'],
     'exclude'       => true,
     'inputType'     => 'checkbox',
     'eval'          => array('tl_class'=>'w50 m12'),
