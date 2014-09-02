@@ -14,3 +14,4 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['inheritPageImage'] = array('Utiliser l\'image parente', 'Utiliser l\'image de la page parente s\'il n\'y a pas d\'image pour la page active.');
+$GLOBALS['TL_LANG']['tl_module']['randomPageImage']  = array('Image aléatoire', 'Présenter l\'image par un fait du hasard.');
