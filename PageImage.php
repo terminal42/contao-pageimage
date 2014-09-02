@@ -63,7 +63,16 @@ class PageImage extends Frontend
     {
         $arrImages = static::findForPage($objPage, $blnInherit);
 
-        if (null === $arrImages || !isset($arrImages[$intIndex])) {
+        if ($arrImages === null) {
+            return null;
+        }
+
+        // Random image
+        if ($intIndex < 0) {
+            $intIndex = rand(0, count($arrImages) - 1);
+        }
+
+         if (!isset($arrImages[$intIndex])) {
             return null;
         }
 
