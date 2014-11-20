@@ -39,7 +39,7 @@ class PageImage extends Frontend
             case 'pageimage_href':
 
                 global $objPage;
-                $arrImage = static::findOne($objPage, (int) $arrTag[1]);
+                $arrImage = static::getOne($objPage, (int) $arrTag[1]);
                 $strKey = str_replace('pageimage_', '', $arrTag[0]);
 
                 if (null === $arrImage || !isset($arrImages[$strKey])) {
