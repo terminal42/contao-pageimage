@@ -31,7 +31,7 @@ class PageImage extends Frontend
         switch($arrTag[0])
         {
             case 'pageimage':
-                $arrTag[0] = 'pageimage_src';
+                $arrTag[0] = 'pageimage_path';
                 // Do NOT add a break;
 
             case 'pageimage_alt':
@@ -42,11 +42,11 @@ class PageImage extends Frontend
                 $arrImage = static::getOne($objPage, (int) $arrTag[1]);
                 $strKey = str_replace('pageimage_', '', $arrTag[0]);
 
-                if (null === $arrImage || !isset($arrImages[$strKey])) {
+                if (null === $arrImage || !isset($arrImage[$strKey])) {
                     return '';
                 }
 
-                return $arrImages[$intIndex][$strKey];
+                return $arrImage[$strKey];
         }
 
         return false;
