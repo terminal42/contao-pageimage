@@ -32,7 +32,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = array
     'label'         => &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
     'inputType'     => 'fileTree',
     'exclude'       => true,
-    'eval'          => array('fieldType'=>'checkbox', 'orderField'=>'pageImageOrder', 'multiple'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>'jpg,jpeg,gif,png', 'isGallery'=>true),
+    'eval'          => array('fieldType'=>'checkbox', 'orderField'=>'pageImageOrder', 'multiple'=>true, 'files'=>true, 'filesOnly'=>true, 'extensions'=>\Config::get('validImageTypes'), 'isGallery'=>true),
     'sql'           => "blob NULL",
 );
 
