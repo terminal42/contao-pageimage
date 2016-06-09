@@ -74,6 +74,10 @@ class ModulePageImage extends Module
         $arrImage['src'] = $this->getImage($arrImage['path'], $arrSize[0], $arrSize[1], $arrSize[2]);
 
         $this->Template->setData($arrImage);
+        
+        $picture = \Picture::create($arrImage['path'], $arrSize)->getTemplateData();
+        $picture['alt'] = specialchars($arrImage['alt']);
+        $this->Template->picture = $picture;
 
         if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($arrImage['src']))) !== false) {
             $this->Template->size = ' ' . $imgSize[3];
