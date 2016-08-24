@@ -82,5 +82,9 @@ class ModulePageImage extends Module
         if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($arrImage['src']))) !== false) {
             $this->Template->size = ' ' . $imgSize[3];
         }
+
+        // Add page information to template
+        global $objPage;
+        $this->Template->currentPage = $objPage->row();
     }
 }
