@@ -53,10 +53,10 @@ html {
         var leftMargin = 0;
 
         if (newHeight < windowHeight) {
-            var newWidth = (windowHeight / imgHeight) * imgWidth;
-            var newHeight = windowHeight;
-            var topMargin = 0;
-            var leftMargin = ((newWidth - windowWidth) / 2) * -1;
+            newWidth = (windowHeight / imgHeight) * imgWidth;
+            newHeight = windowHeight;
+            topMargin = 0;
+            leftMargin = ((newWidth - windowWidth) / 2) * -1;
         }
 
         setStyles(image, {
