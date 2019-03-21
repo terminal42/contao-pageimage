@@ -166,7 +166,7 @@ class PageImage extends Frontend
 
                 $objFile = new \File($objImages->path, true);
 
-                if (!$objFile->isGdImage) {
+                if (!$objFile->isImage) {
                     continue;
                 }
 
