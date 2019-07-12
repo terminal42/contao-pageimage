@@ -30,7 +30,7 @@ class ModuleBackgroundImage extends ModulePageImage
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
-            $objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+            $objTemplate->href = 'contao?do=themes&amp;table=tl_module&act=edit&amp;id=' . $this->id;
 
             return $objTemplate->parse();
         }
