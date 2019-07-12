@@ -62,5 +62,26 @@ class ModuleBackgroundImage extends ModulePageImage
         $agent = \Environment::get('agent');
 
         $this->Template->useCss = (isset($support[$agent->browser]) && $agent->version >= $support[$agent->browser]);
+
+        $mediaQueries = [];
+
+        foreach ($this->Template->picture['sources'] as $value) {
+            foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
+                list($src, $density) = StringUtil::trimsplit(' ', $srcset);
+                $density = (int) $density;
+
+                $mediaQueries[] = [
+                    'mq'  => sprintf(
+                        $density ? 'screen %1$s%2$s, screen%1$s%3$s' : 'screen %1$s%2$s',
+                        $value['media'] ?: '',
+                        $density ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
+                        $density ? " and (min-resolution: {$density}dppx)" : ''
+                    ),
+                    'src' => $src
+                ];
+            }
+        }
+
+        $this->Template->mediaQueries = $mediaQueries;
     }
 }
