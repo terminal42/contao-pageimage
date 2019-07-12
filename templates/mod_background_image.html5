@@ -1,10 +1,10 @@
 <?php if ($this->useCss): ?>
 <style>
 html {
-  background: url("<?php echo specialchars($this->src); ?>") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-image: url("<?= StringUtil::specialchars($this->src) ?>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
   background-size: cover;
 }
 </style>
