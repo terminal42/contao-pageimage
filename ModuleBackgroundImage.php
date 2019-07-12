@@ -68,7 +68,7 @@ class ModuleBackgroundImage extends ModulePageImage
         foreach ($this->Template->picture['sources'] as $value) {
             foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
                 list($src, $density) = StringUtil::trimsplit(' ', $srcset);
-                $density = (int) $density;
+                $density = rtrim($density, 'x');
 
                 $mediaQueries[] = [
                     'mq'  => sprintf(
