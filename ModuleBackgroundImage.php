@@ -73,10 +73,10 @@ class ModuleBackgroundImage extends ModulePageImage
 
                 $mediaQueries[] = [
                     'mq'  => sprintf(
-                        $density ? 'screen %1$s%2$s, screen%1$s%3$s' : 'screen %1$s%2$s',
+                        $density ? 'screen %1$s%2$s, screen%1$s%3$s' : 'screen %1$s',
                         $value['media'] ?: '',
-                        $density ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
-                        $density ? " and (min-resolution: {$density}dppx)" : ''
+                        " and (-webkit-min-device-pixel-ratio: $density)",
+                        " and (min-resolution: {$density}dppx)"
                     ),
                     'src' => $src
                 ];
