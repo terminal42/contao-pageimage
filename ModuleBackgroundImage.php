@@ -30,7 +30,7 @@ class ModuleBackgroundImage extends ModulePageImage
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
-            $objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+            $objTemplate->href = 'contao?do=themes&amp;table=tl_module&act=edit&amp;id=' . $this->id;
 
             return $objTemplate->parse();
         }
@@ -62,5 +62,27 @@ class ModuleBackgroundImage extends ModulePageImage
         $agent = \Environment::get('agent');
 
         $this->Template->useCss = (isset($support[$agent->browser]) && $agent->version >= $support[$agent->browser]);
+
+        $mediaQueries = [];
+
+        $sources = array_merge([$this->Template->picture['img']], $this->Template->picture['sources']);
+        foreach ($sources as $value) {
+            foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
+                list($src, $density) = StringUtil::trimsplit(' ', $srcset);
+                $density = rtrim($density, 'x');
+
+                $mediaQueries[] = [
+                    'mq'  => sprintf(
+                        $density ? 'screen %1$s%2$s, screen%1$s%3$s' : 'screen %1$s',
+                        $value['media'] ?: '',
+                        " and (-webkit-min-device-pixel-ratio: $density)",
+                        " and (min-resolution: {$density}dppx)"
+                    ),
+                    'src' => $src
+                ];
+            }
+        }
+
+        $this->Template->mediaQueries = $mediaQueries;
     }
 }
