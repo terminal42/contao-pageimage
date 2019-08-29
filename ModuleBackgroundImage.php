@@ -22,7 +22,7 @@ class ModuleBackgroundImage extends ModulePageImage
 
     public function generate()
     {
-        if (TL_MODE == 'BE')
+        if ('BE' === TL_MODE)
         {
             $objTemplate = new BackendTemplate('be_wildcard');
 
@@ -39,11 +39,15 @@ class ModuleBackgroundImage extends ModulePageImage
 
         if ($strBuffer == '') {
             return '';
-        } elseif ($this->Template->useCss) {
+        }
+
+        if ($this->Template->useCss) {
             $GLOBALS['TL_HEAD'][] = $strBuffer;
         } else {
             $GLOBALS['TL_BODY'][] = $strBuffer;
         }
+
+        return '';
     }
 
 
@@ -73,10 +77,10 @@ class ModuleBackgroundImage extends ModulePageImage
 
                 $mediaQueries[] = [
                     'mq'  => sprintf(
-                        $density ? 'screen %1$s%2$s, screen%1$s%3$s' : 'screen %1$s',
+                        $density > 1 ? 'screen and %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
                         $value['media'] ?: '',
-                        " and (-webkit-min-device-pixel-ratio: $density)",
-                        " and (min-resolution: {$density}dppx)"
+                        $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
+                        $density > 1 ? " and (min-resolution: {$density}dppx)" : ''
                     ),
                     'src' => $src
                 ];
