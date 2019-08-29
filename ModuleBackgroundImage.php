@@ -68,8 +68,12 @@ class ModuleBackgroundImage extends ModulePageImage
         $this->Template->useCss = (isset($support[$agent->browser]) && $agent->version >= $support[$agent->browser]);
 
         $mediaQueries = [];
+        $sources = [$this->Template->picture['img']];
 
-        $sources = array_merge([$this->Template->picture['img']], $this->Template->picture['sources']);
+        if (\is_array($this->Template->picture['sources'])) {
+            $sources = array_merge($sources, $this->Template->picture['sources']);
+        }
+
         foreach ($sources as $value) {
             foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
                 list($src, $density) = StringUtil::trimsplit(' ', $srcset);
