@@ -79,7 +79,7 @@ class ModuleBackgroundImage extends ModulePageImage
                 list($src, $density) = StringUtil::trimsplit(' ', $srcset);
                 $density = rtrim($density, 'x');
 
-                if (!empty($density) || !empty($value['media'])) {
+                if ((!empty($density) && $density > 1) || !empty($value['media'])) {
                     $mediaQueries[] = [
                         'mq'  => sprintf(
                             $density > 1 ? 'screen and %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
