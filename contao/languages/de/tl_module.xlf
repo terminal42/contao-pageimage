@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file source-language="en">
+        <body>
+            <trans-unit id="tl_module.inheritPageImage.0">
+                <source>Use parent image</source>
+                <target>Übergeordnete Bilder verwenden</target>
+            </trans-unit>
+            <trans-unit id="tl_module.inheritPageImage.1">
+                <source>Use image of the parent page if there's no image for the currently active page.</source>
+                <target>Falls der aktuellen Seite kein Bild zugeordnet ist, wird das Bild der übergeordneten Seite verwendet.</target>
+            </trans-unit>
+            <trans-unit id="tl_module.randomPageImage.0">
+                <source>Random image</source>
+                <target>Zufälliges Bild</target>
+            </trans-unit>
+            <trans-unit id="tl_module.randomPageImage.1">
+                <source>Display a random image.</source>
+                <target>Ein zufälliges Bild anzeigen.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

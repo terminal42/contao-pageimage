@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file source-language="en">
+        <body>
+            <trans-unit id="tl_page.pageImage.0">
+                <source>Image for this page</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImage.1">
+                <source>Please select an image for this page. If you don't choose anything, the image of the parent page might be used.</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageUrl.0">
+                <source>Image-link for this page</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageUrl.1">
+                <source>You can add a link to another Contao page when clicking on the image.</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageOverwriteMeta.0">
+                <source>Overwrite metadata</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageOverwriteMeta.1">
+                <source>Overwrite the metadata from the file manager.</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageAlt.0">
+                <source>Alternate text</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageAlt.1">
+                <source>An accessible website should always provide an alternate text for images with a short description of their content.</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageTitle.0">
+                <source>Link title</source>
+            </trans-unit>
+            <trans-unit id="tl_page.pageImageTitle.1">
+                <source>Enter a title for the link. If you do not provide a title, the target page title will be used.</source>
+            </trans-unit>
+            <trans-unit id="tl_page.image_legend">
+                <source>Page image</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

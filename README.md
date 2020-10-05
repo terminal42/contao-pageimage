@@ -1,5 +1,5 @@
-pageimage Extension
-===================
+pageimage Extension v4
+======================
 
 After installing this extension, you can see a new field for each page
 in the page structure to set an image file. Using the appropriate

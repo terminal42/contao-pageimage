@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    Terminal42\PageimageBundle\:
+        resource: ../src/{Controller,EventListener,Migration}
+
+    Terminal42\PageimageBundle\PageimageHelper: ~

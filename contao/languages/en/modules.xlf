@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file source-language="en">
+        <body>
+            <trans-unit id="FMD.pageimage.0">
+                <source>Page Image</source>
+            </trans-unit>
+            <trans-unit id="FMD.pageimage.1">
+                <source>Allows you to set an image for each page and display it in the frontend. Images can be inherit from parent pages.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

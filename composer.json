@@ -11,23 +11,38 @@
             "homepage":"http://www.terminal42.ch"
         }
     ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/terminal42"
+        }
+    ],
     "support": {
         "issues": "https://github.com/terminal42/contao-pageimage/issues",
         "forum": "https://community.contao.org"
     },
     "require":{
-        "php":"^5.6 || ^7",
-        "contao/core-bundle":"~3.5 || ~4.1",
-        "contao-community-alliance/composer-plugin":"~2.4 || ~3.0"
+        "php":"^7.2",
+        "contao/core-bundle":"^4.9"
     },
-    "replace": {
-        "contao-legacy/pageimage": "self.version"
+    "require-dev": {
+        "contao/manager-plugin": "^2.0",
+        "contao/easy-coding-standard": "^1.0"
     },
-    "extra":{
-        "contao": {
-            "sources":{
-                "": "system/modules/pageimage"
-            }
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload":{
+        "psr-4": {
+            "Terminal42\\PageimageBundle\\": "src/"
         }
+    },
+    "extra": {
+        "contao-manager-plugin": "Terminal42\\PageimageBundle\\ContaoManager\\Plugin"
+    },
+    "scripts": {
+        "cs-fixer": [
+            "vendor/bin/ecs check src/ --fix --ansi"
+        ]
     }
 }

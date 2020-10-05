@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file source-language="en">
+        <body>
+            <trans-unit id="tl_module.inheritPageImage.0">
+                <source>Use parent image</source>
+            </trans-unit>
+            <trans-unit id="tl_module.inheritPageImage.1">
+                <source>Use image of the parent page if there's no image for the currently active page.</source>
+            </trans-unit>
+            <trans-unit id="tl_module.randomPageImage.0">
+                <source>Random image</source>
+            </trans-unit>
+            <trans-unit id="tl_module.randomPageImage.1">
+                <source>Display a random image.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

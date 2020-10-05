@@ -1,0 +1,10 @@
+<?php $this->extend('block_unsearchable'); ?>
+<?php $this->block('content'); ?>
+
+<figure class="image_container">
+    <?php if ($this->hasLink): ?><a href="<?= \Contao\StringUtil::specialchars($this->href) ?>" title="<?= \Contao\StringUtil::specialchars($this->title) ?>"><?php endif; ?>
+        <?php $this->insert('picture_default', $this->picture); ?>
+    <?php if ($this->hasLink): ?></a><?php endif; ?>
+</figure>
+
+<?php $this->endblock(); ?>
