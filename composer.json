@@ -23,7 +23,8 @@
     },
     "require":{
         "php":"^7.2",
-        "contao/core-bundle":"^4.9"
+        "contao/core-bundle":"^4.9",
+        "doctrine/dbal": "^2.11"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
