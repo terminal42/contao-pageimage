@@ -56,7 +56,7 @@ class PageimageController extends AbstractFrontendModuleController
         $size = StringUtil::deserialize($model->imgSize);
         $image['src'] = Image::get($image['path'], $size[0], $size[1], $size[2]);
 
-        $template->setData($image);
+        $template->setData(array_merge($template->getData(), $image));
 
         $picture = Picture::create($image['path'], $size)->getTemplateData();
         $picture['alt'] = StringUtil::specialchars($image['alt']);
