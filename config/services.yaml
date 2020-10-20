@@ -1,9 +1,17 @@
 services:
     _defaults:
         autoconfigure: true
-        autowire: true
-
-    Terminal42\PageimageBundle\:
-        resource: ../src/{Controller,EventListener,Migration}
 
     Terminal42\PageimageBundle\PageimageHelper: ~
+
+    Terminal42\PageimageBundle\Controller\PageimageController:
+        arguments: ['@Terminal42\PageimageBundle\PageimageHelper']
+
+    Terminal42\PageimageBundle\EventListener\InsertTagsListener:
+        arguments: ['@Terminal42\PageimageBundle\PageimageHelper']
+
+    Terminal42\PageimageBundle\Migration\ModuleMigration:
+        arguments: ['@database_connection']
+
+    Terminal42\PageimageBundle\Migration\PageMigration:
+        arguments: [ '@database_connection' ]
