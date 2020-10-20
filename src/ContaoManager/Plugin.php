@@ -12,7 +12,7 @@ use Terminal42\PageimageBundle\Terminal42PageimageBundle;
 
 class Plugin implements BundlePluginInterface
 {
-    public function getBundles(ParserInterface $parser)
+    public function getBundles(ParserInterface $parser): array
     {
         return [
             (new BundleConfig(Terminal42PageimageBundle::class))->setLoadAfter([ContaoCoreBundle::class]),
