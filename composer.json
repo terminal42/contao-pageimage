@@ -15,11 +15,12 @@
     }],
     "support": {
         "issues": "https://github.com/terminal42/contao-pageimage/issues",
+        "source": "https://github.com/terminal42/contao-pageimage",
         "forum": "https://community.contao.org"
     },
-    "require":{
-        "php":"^7.2",
-        "contao/core-bundle":"^4.9",
+    "require": {
+        "php": "^7.2",
+        "contao/core-bundle": "^4.9",
         "doctrine/dbal": "^2.11"
     },
     "require-dev": {
@@ -29,7 +30,7 @@
     "conflict": {
         "contao/manager-plugin": "<2.0 || >=3.0"
     },
-    "autoload":{
+    "autoload": {
         "psr-4": {
             "Terminal42\\PageimageBundle\\": "src/"
         }
