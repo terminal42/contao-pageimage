@@ -23,7 +23,7 @@ class ModuleMigration extends AbstractMigration
     public function shouldRun(): bool
     {
         return $this->connection->fetchOne(
-            "SELECT COUNT(*) FROM tl_module WHERE type='pageImage' OR type='backgroundImage'"
+            "SELECT COUNT(*) FROM tl_module WHERE BINARY type='pageImage' OR BINARY type='backgroundImage'"
         ) > 0;
     }
 
