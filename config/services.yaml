@@ -2,7 +2,8 @@ services:
     _defaults:
         autoconfigure: true
 
-    Terminal42\PageimageBundle\PageimageHelper: ~
+    Terminal42\PageimageBundle\PageimageHelper:
+        public: true
 
     Terminal42\PageimageBundle\Controller\PageimageController:
         arguments: ['@Terminal42\PageimageBundle\PageimageHelper']
