@@ -12,6 +12,9 @@
     "funding": [{
         "type": "github",
         "url": "https://github.com/terminal42"
+    }, {
+        "type": "other",
+        "url": "https://ko-fi.com/terminal42"
     }],
     "support": {
         "issues": "https://github.com/terminal42/contao-pageimage/issues",
