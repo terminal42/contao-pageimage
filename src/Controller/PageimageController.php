@@ -66,7 +66,10 @@ class PageimageController extends AbstractFrontendModuleController
             $template->size = ' '.$imgSize[3];
         }
 
-        $template->mediaQueries = $this->compileMediaQueries($picture);
+        // Lazy-load the media queries
+        $template->mediaQueries = function () use ($picture) {
+            return $this->compileMediaQueries($picture);
+        };
 
         return $template->getResponse();
     }
