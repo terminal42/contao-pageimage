@@ -8,6 +8,12 @@
             <trans-unit id="tl_module.inheritPageImage.1">
                 <source>Use image of the parent page if there's no image for the currently active page.</source>
             </trans-unit>
+            <trans-unit id="tl_module.allPageImages.0">
+                <source>All images</source>
+            </trans-unit>
+            <trans-unit id="tl_module.allPageImages.1">
+                <source>Generate all images of the current page.</source>
+            </trans-unit>
             <trans-unit id="tl_module.randomPageImage.0">
                 <source>Random image</source>
             </trans-unit>

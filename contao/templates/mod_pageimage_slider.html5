@@ -1,0 +1,25 @@
+<?php $this->extend('block_unsearchable'); ?>
+<?php $this->block('content'); ?>
+
+
+<div class="content-slider" data-config="0,300,0,">
+  <div class="slider-wrapper">
+
+    <?php foreach ($this->allImages as $image): ?>
+      <figure class="image_container">
+        <?php if ($image['hasLink']): ?><a href="<?= \Contao\StringUtil::specialchars($image['href']) ?>" title="<?= \Contao\StringUtil::specialchars($image['title']) ?>"><?php endif; ?>
+          <?php $this->insert('picture_default', $image['picture']); ?>
+          <?php if ($image['hasLink']): ?></a><?php endif; ?>
+      </figure>
+    <?php endforeach; ?>
+
+  </div>
+</div>
+
+<nav class="slider-control">
+  <a href="#" class="slider-prev"><?= $GLOBALS['TL_LANG']['MSC']['previous'] ?></a>
+  <span class="slider-menu"></span>
+  <a href="#" class="slider-next"><?= $GLOBALS['TL_LANG']['MSC']['next'] ?></a>
+</nav>
+
+<?php $this->endblock(); ?>

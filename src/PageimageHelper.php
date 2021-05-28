@@ -37,7 +37,7 @@ class PageimageHelper
         return $images[$index];
     }
 
-    private function findForPage(PageModel $page, bool $inherit = true): ?array
+    public function findForPage(PageModel $page, bool $inherit = true): ?array
     {
         if (!isset(static::$imagesCache[$page->id])) {
             static::$imagesCache[$page->id] = false;

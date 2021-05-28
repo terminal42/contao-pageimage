@@ -10,6 +10,14 @@
                 <source>Use image of the parent page if there's no image for the currently active page.</source>
                 <target>Falls der aktuellen Seite kein Bild zugeordnet ist, wird das Bild der übergeordneten Seite verwendet.</target>
             </trans-unit>
+            <trans-unit id="tl_module.allPageImages.0">
+                <source>All images</source>
+                <target>Alle Bilder</target>
+            </trans-unit>
+            <trans-unit id="tl_module.allPageImages.1">
+                <source>Generate all images of the current page.</source>
+                <target>Generiert alle Bilder der aktuellen Seite.</target>
+            </trans-unit>
             <trans-unit id="tl_module.randomPageImage.0">
                 <source>Random image</source>
                 <target>Zufälliges Bild</target>

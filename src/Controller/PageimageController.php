@@ -33,6 +33,33 @@ class PageimageController extends AbstractFrontendModuleController
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): ?Response
     {
+        $images = $this->getImages($model);
+
+        if (empty($images)) {
+            return new Response();
+        }
+
+        $templateData = [];
+        foreach ($images as $image) {
+            $templateData[] = $this->generateImage($image, $model);
+        }
+
+        $size = StringUtil::deserialize($model->imgSize);
+        $image['src'] = Image::get($image['path'], $size[0], $size[1], $size[2]);
+
+        $template->setData(array_merge($template->getData(), $templateData[0]));
+        $template->allImages = $templateData;
+
+        // Lazy-load the media queries
+        $template->mediaQueries = function () use ($templateData) {
+            return $this->compileMediaQueries($templateData[0]['picture']);
+        };
+
+        return $template->getResponse();
+    }
+
+    private function getImages(ModuleModel $model): array
+    {
         if ($model->defineRoot) {
             $objPage = PageModel::findByPk($model->rootPage);
         } else {
@@ -40,41 +67,47 @@ class PageimageController extends AbstractFrontendModuleController
         }
 
         if (null === $objPage) {
-            return new Response();
+            return [];
         }
 
-        $image = $this->helper->getOneByPageAndIndex(
-            $objPage,
-            $model->randomPageImage ? null : (int) $model->levelOffset,
-            (bool) $model->inheritPageImage
-        );
+        $images = $this->helper->findForPage($objPage, (bool) $model->inheritPageImage);
 
-        if (null === $image) {
-            return new Response();
+        if (null === $images) {
+            return [];
         }
 
+        if ($model->allPageImages) {
+            return $images;
+        }
+
+        if ($model->randomPageImage) {
+            $index = random_int(0, \count($images) - 1);
+        }
+
+        if (!isset($images[$index])) {
+            return [];
+        }
+
+        return [$images[$index]];
+    }
+
+    private function generateImage(array $image, ModuleModel $model)
+    {
         $size = StringUtil::deserialize($model->imgSize);
         $image['src'] = Image::get($image['path'], $size[0], $size[1], $size[2]);
 
-        $template->setData(array_merge($template->getData(), $image));
-
         $picture = Picture::create($image['path'], $size)->getTemplateData();
         $picture['alt'] = StringUtil::specialchars($image['alt']);
-        $template->picture = $picture;
+        $image['picture'] = $picture;
 
         if (false !== ($imgSize = @getimagesize(TL_ROOT.'/'.rawurldecode($image['src'])))) {
-            $template->size = ' '.$imgSize[3];
+            $image['size'] = ' '.$imgSize[3];
         }
 
-        // Lazy-load the media queries
-        $template->mediaQueries = function () use ($picture) {
-            return $this->compileMediaQueries($picture);
-        };
-
-        return $template->getResponse();
+        return $image;
     }
 
-    private function compileMediaQueries(array $picture)
+    private function compileMediaQueries(array $picture): array
     {
         $mediaQueries = [];
         $sources = [$picture['img']];
