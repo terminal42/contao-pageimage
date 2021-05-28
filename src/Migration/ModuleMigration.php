@@ -22,6 +22,12 @@ class ModuleMigration extends AbstractMigration
 
     public function shouldRun(): bool
     {
+        $schemaManager = $this->connection->getSchemaManager();
+
+        if (null === $schemaManager || !$schemaManager->tablesExist('tl_module')) {
+            return false;
+        }
+
         return $this->connection->fetchOne(
             "SELECT COUNT(*) FROM tl_module WHERE type = BINARY 'pageImage' OR type = BINARY 'backgroundImage'"
         ) > 0;
