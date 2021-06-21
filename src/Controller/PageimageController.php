@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Terminal42\PageimageBundle\Controller;
 
+use Contao\Controller;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Image;
 use Contao\ModuleModel;
 use Contao\PageModel;
-use Contao\Picture;
 use Contao\StringUtil;
 use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,20 +91,15 @@ class PageimageController extends AbstractFrontendModuleController
         return [$images[$index]];
     }
 
-    private function generateImage(array $image, ModuleModel $model)
+    private function generateImage(array $image, ModuleModel $model): array
     {
-        $size = StringUtil::deserialize($model->imgSize);
-        $image['src'] = Image::get($image['path'], $size[0], $size[1], $size[2]);
+        $image['singleSRC'] = $image['path'];
+        $image['size'] = $model->imgSize;
 
-        $picture = Picture::create($image['path'], $size)->getTemplateData();
-        $picture['alt'] = StringUtil::specialchars($image['alt']);
-        $image['picture'] = $picture;
+        $result = new \stdClass();
+        Controller::addImageToTemplate($result, $image);
 
-        if (false !== ($imgSize = @getimagesize(TL_ROOT.'/'.rawurldecode($image['src'])))) {
-            $image['size'] = ' '.$imgSize[3];
-        }
-
-        return $image;
+        return (array) $result;
     }
 
     private function compileMediaQueries(array $picture): array
