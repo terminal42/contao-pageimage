@@ -40,6 +40,7 @@ class PageimageController extends AbstractFrontendModuleController
         }
 
         $templateData = [];
+
         foreach ($images as $image) {
             $templateData[] = $this->generateImage($image, $model);
         }

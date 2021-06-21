@@ -1,21 +1,26 @@
 {
-    "name":"terminal42/contao-pageimage",
-    "description":"[Contao CMS] Assign images to pages and output them on layout level using a frontend module.",
-    "keywords":["contao", "page", "image", "background"],
+    "name": "terminal42/contao-pageimage",
+    "description": "[Contao CMS] Assign images to pages and output them on layout level using a frontend module.",
+    "keywords": ["contao", "page", "image", "background"],
     "homepage": "https://github.com/terminal42/contao-pageimage",
-    "type":"contao-bundle",
-    "license":"MIT",
-    "authors":[{
-        "name":"terminal42 gmbh",
-        "homepage":"http://www.terminal42.ch"
-    }],
-    "funding": [{
-        "type": "github",
-        "url": "https://github.com/terminal42"
-    }, {
-        "type": "other",
-        "url": "https://ko-fi.com/terminal42"
-    }],
+    "type": "contao-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "terminal42 gmbh",
+            "homepage": "http://www.terminal42.ch"
+        }
+    ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/terminal42"
+        },
+        {
+            "type": "other",
+            "url": "https://ko-fi.com/terminal42"
+        }
+    ],
     "support": {
         "issues": "https://github.com/terminal42/contao-pageimage/issues",
         "source": "https://github.com/terminal42/contao-pageimage",
