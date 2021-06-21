@@ -132,7 +132,7 @@ class PageimageHelper
     {
         $order = StringUtil::deserialize($pageModel->pageImageOrder);
 
-        if (!empty($order) && \is_array($order)) {
+        if (empty($order) || !\is_array($order)) {
             return $images;
         }
 
