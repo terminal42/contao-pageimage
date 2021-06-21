@@ -2,6 +2,11 @@ services:
     _defaults:
         autoconfigure: true
 
+    _instanceof:
+        Symfony\Bundle\FrameworkBundle\Controller\AbstractController:
+            calls:
+                - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
+
     Terminal42\PageimageBundle\PageimageHelper: ~
 
     Terminal42\PageimageBundle\Controller\PageimageController:
