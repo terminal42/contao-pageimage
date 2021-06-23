@@ -83,6 +83,8 @@ class PageimageController extends AbstractFrontendModuleController
 
         if ($model->randomPageImage) {
             $index = random_int(0, \count($images) - 1);
+        } else {
+            $index = $model->levelOffset;
         }
 
         if (!isset($images[$index])) {
