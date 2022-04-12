@@ -102,10 +102,10 @@ class PageimageHelper
                     $meta['title'] = StringUtil::specialchars($objFile->basename);
                 }
 
-                $image['alt'] = $meta['alt'];
-                $image['imageUrl'] = $meta['link'];
-                $image['caption'] = $meta['caption'];
-                $image['title'] = $meta['title'];
+                $image['alt'] = $meta['alt'] ?? '';
+                $image['imageUrl'] = $meta['link'] ?? '';
+                $image['caption'] = $meta['caption'] ?? '';
+                $image['title'] = $meta['title'] ?? '';
                 $image['meta'] = $meta;
 
                 if ($page->pageImageOverwriteMeta) {
