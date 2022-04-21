@@ -106,6 +106,7 @@ class PageimageHelper
                 $image['imageUrl'] = $meta['link'] ?? '';
                 $image['caption'] = $meta['caption'] ?? '';
                 $image['title'] = $meta['title'] ?? '';
+                $image['imageTitle'] = $image['title'];
                 $image['meta'] = $meta;
                 $image['hasLink'] = false;
                 $image['href'] = '';
@@ -113,6 +114,7 @@ class PageimageHelper
                 if ($page->pageImageOverwriteMeta) {
                     $image['alt'] = $page->pageImageAlt;
                     $image['title'] = $page->pageImageTitle;
+                    $image['imageTitle'] = $page->pageImageTitle;
                     $image['imageUrl'] = $page->pageImageUrl;
 
                     if (!empty($page->pageImageUrl)) {
