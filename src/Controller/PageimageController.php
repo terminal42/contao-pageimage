@@ -118,7 +118,7 @@ class PageimageController extends AbstractFrontendModuleController
             foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
                 [$src, $density] = StringUtil::trimsplit(' ', $srcset);
 
-                if (null === $density) {
+                if (null === $density || 'x' !== substr($density, -1)) {
                     continue;
                 }
 
@@ -127,8 +127,8 @@ class PageimageController extends AbstractFrontendModuleController
                 if (1 !== (int) $density || !empty($value['media'])) {
                     $mediaQueries[] = [
                         'mq' => sprintf(
-                            $density > 1 ? 'screen and %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
-                            $value['media'] ?: '',
+                            $density > 1 ? 'screen %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
+                            $value['media'] ? " and {$value['media']}" : '',
                             $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
                             $density > 1 ? " and (min-resolution: {$density}dppx)" : ''
                         ),
