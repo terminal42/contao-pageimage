@@ -99,7 +99,7 @@ class PageimageController extends AbstractFrontendModuleController
         $image['singleSRC'] = $image['path'];
         $image['size'] = $model->imgSize;
 
-        $result = new \stdClass();
+        $result = (object) $image;
         Controller::addImageToTemplate($result, $image);
 
         return (array) $result;
