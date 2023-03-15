@@ -116,7 +116,7 @@ class PageimageController extends AbstractFrontendModuleController
 
         foreach ($sources as $value) {
             foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
-                [$src, $density] = StringUtil::trimsplit(' ', $srcset);
+                [$src, $density] = StringUtil::trimsplit(' ', $srcset) + [null, null];
 
                 if (null === $density || 'x' !== substr($density, -1)) {
                     continue;
