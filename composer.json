@@ -8,7 +8,7 @@
     "authors": [
         {
             "name": "terminal42 gmbh",
-            "homepage": "http://www.terminal42.ch"
+            "homepage": "https://www.terminal42.ch"
         }
     ],
     "funding": [
@@ -32,8 +32,7 @@
         "doctrine/dbal": "^2.11 || ^3"
     },
     "require-dev": {
-        "contao/manager-plugin": "^2.0",
-        "contao/easy-coding-standard": "^3.0"
+        "contao/manager-plugin": "^2.0"
     },
     "conflict": {
         "contao/manager-plugin": "<2.0 || >=3.0"
@@ -47,8 +46,6 @@
         "contao-manager-plugin": "Terminal42\\PageimageBundle\\ContaoManager\\Plugin"
     },
     "scripts": {
-        "cs-fixer": [
-            "vendor/bin/ecs check src/ --fix --ansi"
-        ]
+        "cs-fixer": "@php tools/ecs/vendor/bin/ecs check src/ --config tools/ecs/config.php --fix --ansi"
     }
 }

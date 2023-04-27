@@ -60,4 +60,4 @@ Then, update the database via the `contao:migrate` command or the Contao install
 
 ## License
 
-This bundle is released under the [MIT](LICENSE)
+This bundle is released under the [MIT license](LICENSE)
