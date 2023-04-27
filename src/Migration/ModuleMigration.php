@@ -10,19 +10,13 @@ use Doctrine\DBAL\Connection;
 
 class ModuleMigration extends AbstractMigration
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
-
-    public function __construct(Connection $connection)
+    public function __construct(private readonly Connection $connection)
     {
-        $this->connection = $connection;
     }
 
     public function shouldRun(): bool
     {
-        $schemaManager = $this->connection->getSchemaManager();
+        $schemaManager = $this->connection->createSchemaManager();
 
         if (null === $schemaManager || !$schemaManager->tablesExist('tl_module')) {
             return false;

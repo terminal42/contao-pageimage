@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Terminal42\PageimageBundle\Controller;
 
-use Contao\Controller;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
-use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
-use Contao\Image;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
+use Contao\CoreBundle\Image\Studio\Studio;
 use Contao\ModuleModel;
 use Contao\PageModel;
 use Contao\StringUtil;
@@ -16,22 +15,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Terminal42\PageimageBundle\PageimageHelper;
 
-/**
- * @FrontendModule(category="miscellaneous")
- */
+#[AsFrontendModule(category: 'miscellaneous')]
 class PageimageController extends AbstractFrontendModuleController
 {
-    /**
-     * @var PageimageHelper
-     */
-    private $helper;
-
-    public function __construct(PageimageHelper $helper)
+    public function __construct(private readonly PageimageHelper $helper, private readonly Studio $studio)
     {
-        $this->helper = $helper;
     }
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): ?Response
+    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
         $images = $this->getImages($model);
 
@@ -40,21 +31,17 @@ class PageimageController extends AbstractFrontendModuleController
         }
 
         $templateData = [];
+        $figure = $this->studio->createFigureBuilder()->setSize($model->imgSize);
 
         foreach ($images as $image) {
-            $templateData[] = $this->generateImage($image, $model);
+            $templateData[] = $figure->from($image['path'])->build()->getLegacyTemplateData();
         }
-
-        $size = StringUtil::deserialize($model->imgSize);
-        $image['src'] = Image::get($image['path'], $size[0], $size[1], $size[2]);
 
         $template->setData(array_merge($template->getData(), $templateData[0]));
         $template->allImages = $templateData;
 
         // Lazy-load the media queries
-        $template->mediaQueries = function () use ($templateData) {
-            return $this->compileMediaQueries($templateData[0]['picture']);
-        };
+        $template->mediaQueries = fn () => $this->compileMediaQueries($templateData[0]['picture']);
 
         return $template->getResponse();
     }
@@ -94,17 +81,6 @@ class PageimageController extends AbstractFrontendModuleController
         return [$images[$index]];
     }
 
-    private function generateImage(array $image, ModuleModel $model): array
-    {
-        $image['singleSRC'] = $image['path'];
-        $image['size'] = $model->imgSize;
-
-        $result = (object) $image;
-        Controller::addImageToTemplate($result, $image);
-
-        return (array) $result;
-    }
-
     private function compileMediaQueries(array $picture): array
     {
         $mediaQueries = [];
@@ -118,11 +94,11 @@ class PageimageController extends AbstractFrontendModuleController
             foreach (StringUtil::trimsplit(',', $value['srcset']) as $srcset) {
                 [$src, $density] = StringUtil::trimsplit(' ', $srcset) + [null, null];
 
-                if (null === $density || 'x' !== substr($density, -1)) {
+                if (null === $density || !str_ends_with((string) $density, 'x')) {
                     continue;
                 }
 
-                $density = rtrim($density, 'x');
+                $density = rtrim((string) $density, 'x');
 
                 if (1 !== (int) $density || !empty($value['media'])) {
                     $mediaQueries[] = [

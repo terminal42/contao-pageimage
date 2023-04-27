@@ -4,23 +4,15 @@ declare(strict_types=1);
 
 namespace Terminal42\PageimageBundle\EventListener;
 
-use Contao\CoreBundle\ServiceAnnotation\Hook;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\StringUtil;
 use Terminal42\PageimageBundle\PageimageHelper;
 
-/**
- * @Hook("replaceInsertTags")
- */
+#[AsHook('replaceInsertTags')]
 class InsertTagsListener
 {
-    /**
-     * @var PageimageHelper
-     */
-    private $helper;
-
-    public function __construct(PageimageHelper $helper)
+    public function __construct(private readonly PageimageHelper $helper)
     {
-        $this->helper = $helper;
     }
 
     public function __invoke(string $tag)
@@ -28,7 +20,6 @@ class InsertTagsListener
         $tokens = StringUtil::trimsplit('::', $tag);
 
         switch ($tokens[0]) {
-            /** @noinspection PhpMissingBreakStatementInspection */
             case 'pageimage':
                 $tokens[0] = 'pageimage_path';
                 // no break
@@ -44,7 +35,7 @@ class InsertTagsListener
                     isset($tokens[1]) ? (int) $tokens[1] : null
                 );
 
-                $key = str_replace('pageimage_', '', $tokens[0]);
+                $key = str_replace('pageimage_', '', (string) $tokens[0]);
 
                 if (null === $image || !isset($image[$key])) {
                     return '';

@@ -10,7 +10,7 @@ services:
     Terminal42\PageimageBundle\PageimageHelper: ~
 
     Terminal42\PageimageBundle\Controller\PageimageController:
-        arguments: ['@Terminal42\PageimageBundle\PageimageHelper']
+        arguments: ['@Terminal42\PageimageBundle\PageimageHelper', '@contao.image.studio']
 
     Terminal42\PageimageBundle\EventListener\InsertTagsListener:
         arguments: ['@Terminal42\PageimageBundle\PageimageHelper']
