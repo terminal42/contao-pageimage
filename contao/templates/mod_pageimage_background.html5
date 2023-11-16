@@ -1,7 +1,7 @@
 <?php ob_start() ?>
 <style>
     html {
-        background-image: url("<?= StringUtil::specialchars($this->src) ?>");
+        background-image: url("<?= \Contao\StringUtil::specialchars($this->src) ?>");
         background-repeat: no-repeat;
         background-position: center;
         background-attachment: fixed;
@@ -10,7 +10,7 @@
     <?php foreach ($this->mediaQueries as $mediaQuery): ?>
     @media <?= $mediaQuery['mq'] ?> {
         html {
-            background-image: url("<?= StringUtil::specialchars($mediaQuery['src']) ?>");
+            background-image: url("<?= \Contao\StringUtil::specialchars($mediaQuery['src']) ?>");
         }
     }
     <?php endforeach ?>

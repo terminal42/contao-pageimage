@@ -18,8 +18,10 @@ use Terminal42\PageimageBundle\PageimageHelper;
 #[AsFrontendModule(category: 'miscellaneous')]
 class PageimageController extends AbstractFrontendModuleController
 {
-    public function __construct(private readonly PageimageHelper $helper, private readonly Studio $studio)
-    {
+    public function __construct(
+        private readonly PageimageHelper $helper,
+        private readonly Studio $studio,
+    ) {
     }
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
@@ -106,7 +108,7 @@ class PageimageController extends AbstractFrontendModuleController
                             $density > 1 ? 'screen %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
                             $value['media'] ? " and {$value['media']}" : '',
                             $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
-                            $density > 1 ? " and (min-resolution: {$density}dppx)" : ''
+                            $density > 1 ? " and (min-resolution: {$density}dppx)" : '',
                         ),
                         'src' => $src,
                     ];

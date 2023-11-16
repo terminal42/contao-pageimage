@@ -15,7 +15,7 @@ class InsertTagsListener
     {
     }
 
-    public function __invoke(string $tag)
+    public function __invoke(string $tag): string|null
     {
         $tokens = StringUtil::trimsplit('::', $tag);
 
@@ -27,12 +27,11 @@ class InsertTagsListener
             case 'pageimage_alt':
             case 'pageimage_title':
             case 'pageimage_href':
-
                 global $objPage;
 
                 $image = $this->helper->getOneByPageAndIndex(
                     $objPage,
-                    isset($tokens[1]) ? (int) $tokens[1] : null
+                    isset($tokens[1]) ? (int) $tokens[1] : null,
                 );
 
                 $key = str_replace('pageimage_', '', (string) $tokens[0]);

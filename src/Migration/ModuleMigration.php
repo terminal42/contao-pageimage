@@ -18,12 +18,12 @@ class ModuleMigration extends AbstractMigration
     {
         $schemaManager = $this->connection->createSchemaManager();
 
-        if (null === $schemaManager || !$schemaManager->tablesExist('tl_module')) {
+        if (!$schemaManager->tablesExist('tl_module')) {
             return false;
         }
 
         return $this->connection->fetchOne(
-            "SELECT COUNT(*) FROM tl_module WHERE type = BINARY 'pageImage' OR type = BINARY 'backgroundImage'"
+            "SELECT COUNT(*) FROM tl_module WHERE type = BINARY 'pageImage' OR type = BINARY 'backgroundImage'",
         ) > 0;
     }
 

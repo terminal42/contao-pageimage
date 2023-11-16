@@ -17,7 +17,7 @@ class PageimageHelper
      */
     protected static $imagesCache = [];
 
-    public function getOneByPageAndIndex(PageModel $page, ?int $index = 0, bool $inherit = true): ?array
+    public function getOneByPageAndIndex(PageModel $page, int|null $index = 0, bool $inherit = true): array|null
     {
         $images = $this->findForPage($page, $inherit);
 
@@ -37,7 +37,7 @@ class PageimageHelper
         return $images[$index];
     }
 
-    public function findForPage(PageModel $page, bool $inherit = true): ?array
+    public function findForPage(PageModel $page, bool $inherit = true): array|null
     {
         if (!isset(static::$imagesCache[$page->id])) {
             static::$imagesCache[$page->id] = false;

@@ -32,7 +32,7 @@ class PageMigration extends AbstractMigration
         }
 
         return $this->connection->executeQuery(
-            "SELECT COUNT(*) FROM tl_page WHERE pageImageJumpTo>0 OR pageImageAlt!='' OR pageImageTitle!=''"
+            "SELECT COUNT(*) FROM tl_page WHERE pageImageJumpTo>0 OR pageImageAlt!='' OR pageImageTitle!=''",
         )->fetchOne() > 0;
     }
 
