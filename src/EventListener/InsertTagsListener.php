@@ -15,7 +15,7 @@ class InsertTagsListener
     {
     }
 
-    public function __invoke(string $tag): string|null
+    public function __invoke(string $tag): string|false|null
     {
         $tokens = StringUtil::trimsplit('::', $tag);
 
