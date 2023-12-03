@@ -3,9 +3,9 @@
 
 <?php foreach ($this->allImages as $image): ?>
 <figure class="image_container">
-    <?php if ($image['hasLink']): ?><a href="<?= \Contao\StringUtil::specialchars($image['href']) ?>" title="<?= \Contao\StringUtil::specialchars($image['title']) ?>"><?php endif; ?>
+    <?php if ($image['hasLink'] ?? false): ?><a href="<?= \Contao\StringUtil::specialchars($image['href']) ?>" title="<?= \Contao\StringUtil::specialchars($image['title']) ?>"><?php endif; ?>
         <?php $this->insert('picture_default', $image['picture']); ?>
-    <?php if ($image['hasLink']): ?></a><?php endif; ?>
+    <?php if ($image['hasLink'] ?? false): ?></a><?php endif; ?>
 </figure>
 <?php endforeach; ?>
 
