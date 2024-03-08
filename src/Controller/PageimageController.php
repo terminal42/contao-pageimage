@@ -51,16 +51,16 @@ class PageimageController extends AbstractFrontendModuleController
     private function getImages(ModuleModel $model): array
     {
         if ($model->defineRoot) {
-            $objPage = PageModel::findByPk($model->rootPage);
+            $pageModel = PageModel::findByPk($model->rootPage);
         } else {
-            global $objPage;
+            $pageModel = $this->getPageModel();
         }
 
-        if (null === $objPage) {
+        if (null === $pageModel) {
             return [];
         }
 
-        $images = $this->helper->findForPage($objPage, (bool) $model->inheritPageImage);
+        $images = $this->helper->findForPage($pageModel, (bool) $model->inheritPageImage);
 
         if (null === $images) {
             return [];
