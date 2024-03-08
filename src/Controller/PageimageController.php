@@ -36,7 +36,10 @@ class PageimageController extends AbstractFrontendModuleController
         $figure = $this->studio->createFigureBuilder()->setSize($model->imgSize);
 
         foreach ($images as $image) {
-            $templateData[] = $figure->from($image['path'])->build()->getLegacyTemplateData();
+            $templateData[] = array_merge(
+                $figure->from($image['path'])->build()->getLegacyTemplateData(),
+                $image,
+            );
         }
 
         $template->setData(array_merge($template->getData(), $templateData[0]));
