@@ -54,7 +54,7 @@ class PageimageController extends AbstractFrontendModuleController
     private function getImages(ModuleModel $model): array
     {
         if ($model->defineRoot) {
-            $pageModel = PageModel::findByPk($model->rootPage);
+            $pageModel = PageModel::findById($model->rootPage);
         } else {
             $pageModel = $this->getPageModel();
         }
@@ -107,7 +107,7 @@ class PageimageController extends AbstractFrontendModuleController
 
                 if (1 !== (int) $density || !empty($value['media'])) {
                     $mediaQueries[] = [
-                        'mq' => sprintf(
+                        'mq' => \sprintf(
                             $density > 1 ? 'screen %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
                             $value['media'] ? " and {$value['media']}" : '',
                             $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
