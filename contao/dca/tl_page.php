@@ -9,7 +9,7 @@ $pm = PaletteManipulator::create()
 ;
 
 foreach ($GLOBALS['TL_DCA']['tl_page']['palettes'] as $name => $palette) {
-    if ('__selector__' === $name) {
+    if (\in_array($name, ['__selector__', 'news_feed'], true)) {
         continue;
     }
 
