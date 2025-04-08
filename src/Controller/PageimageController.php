@@ -36,17 +36,25 @@ class PageimageController extends AbstractFrontendModuleController
         $figure = $this->studio->createFigureBuilder()->setSize($model->imgSize);
 
         foreach ($images as $image) {
+            if (!$figure = $figure->from($image['path'])->buildIfResourceExists()) {
+                continue;
+            }
+
             $templateData[] = array_merge(
-                $figure->from($image['path'])->buildIfResourceExists()?->getLegacyTemplateData() ?? [],
+                $figure->getLegacyTemplateData(),
                 $image,
             );
+        }
+
+        if (empty($templateData)) {
+            return new Response();
         }
 
         $template->setData(array_merge($template->getData(), $templateData[0]));
         $template->allImages = $templateData;
 
         // Lazy-load the media queries
-        $template->mediaQueries = fn () => $this->compileMediaQueries($templateData[0]['picture'] ?? []);
+        $template->mediaQueries = fn () => $this->compileMediaQueries($templateData[0]['picture']);
 
         return $template->getResponse();
     }
@@ -88,10 +96,6 @@ class PageimageController extends AbstractFrontendModuleController
 
     private function compileMediaQueries(array $picture): array
     {
-        if ([] === $picture) {
-            return [];
-        }
-
         $mediaQueries = [];
         $sources = [$picture['img']];
 
