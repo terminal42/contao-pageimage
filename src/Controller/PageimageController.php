@@ -37,7 +37,7 @@ class PageimageController extends AbstractFrontendModuleController
 
         foreach ($images as $image) {
             $templateData[] = array_merge(
-                $figure->from($image['path'])->build()->getLegacyTemplateData(),
+                $figure->from($image['path'])->buildIfResourceExists()?->getLegacyTemplateData() ?? [],
                 $image,
             );
         }
@@ -46,7 +46,7 @@ class PageimageController extends AbstractFrontendModuleController
         $template->allImages = $templateData;
 
         // Lazy-load the media queries
-        $template->mediaQueries = fn () => $this->compileMediaQueries($templateData[0]['picture']);
+        $template->mediaQueries = fn () => $this->compileMediaQueries($templateData[0]['picture'] ?? []);
 
         return $template->getResponse();
     }
@@ -88,10 +88,14 @@ class PageimageController extends AbstractFrontendModuleController
 
     private function compileMediaQueries(array $picture): array
     {
+        if ([] === $picture) {
+            return [];
+        }
+
         $mediaQueries = [];
         $sources = [$picture['img']];
 
-        if (\is_array($picture['sources'])) {
+        if (\is_array($picture['sources'] ?? null)) {
             $sources = array_merge($sources, $picture['sources']);
         }
 
@@ -109,7 +113,7 @@ class PageimageController extends AbstractFrontendModuleController
                     $mediaQueries[] = [
                         'mq' => \sprintf(
                             $density > 1 ? 'screen %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
-                            $value['media'] ? " and {$value['media']}" : '',
+                            ($value['media'] ?? null) ? " and {$value['media']}" : '',
                             $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
                             $density > 1 ? " and (min-resolution: {$density}dppx)" : '',
                         ),
