@@ -119,7 +119,7 @@ class PageimageController extends AbstractFrontendModuleController
                     $mediaQueries[] = [
                         'mq' => \sprintf(
                             $density > 1 ? 'screen %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
-                            ($value['media'] ?? null) ? " and {$value['media']}" : '',
+                            $value['media'] ?? null ? " and {$value['media']}" : '',
                             $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
                             $density > 1 ? " and (min-resolution: {$density}dppx)" : '',
                         ),
