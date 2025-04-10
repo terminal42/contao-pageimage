@@ -33,13 +33,23 @@ class PageimageController extends AbstractFrontendModuleController
         }
 
         $templateData = [];
-        $figure = $this->studio->createFigureBuilder()->setSize($model->imgSize);
+        $figureBuilder = $this->studio->createFigureBuilder()->setSize($model->imgSize);
 
         foreach ($images as $image) {
+            $figure = $figureBuilder->from($image['path'])->buildIfResourceExists();
+
+            if (!$figure) {
+                continue;
+            }
+
             $templateData[] = array_merge(
-                $figure->from($image['path'])->build()->getLegacyTemplateData(),
+                $figure->getLegacyTemplateData(),
                 $image,
             );
+        }
+
+        if (!$templateData) {
+            return new Response();
         }
 
         $template->setData(array_merge($template->getData(), $templateData[0]));
@@ -91,7 +101,7 @@ class PageimageController extends AbstractFrontendModuleController
         $mediaQueries = [];
         $sources = [$picture['img']];
 
-        if (\is_array($picture['sources'])) {
+        if (\is_array($picture['sources'] ?? null)) {
             $sources = array_merge($sources, $picture['sources']);
         }
 
@@ -109,7 +119,7 @@ class PageimageController extends AbstractFrontendModuleController
                     $mediaQueries[] = [
                         'mq' => \sprintf(
                             $density > 1 ? 'screen %1$s%2$s, screen and %1$s%3$s' : 'screen and %1$s',
-                            $value['media'] ? " and {$value['media']}" : '',
+                            $value['media'] ?? null ? " and {$value['media']}" : '',
                             $density > 1 ? " and (-webkit-min-device-pixel-ratio: $density)" : '',
                             $density > 1 ? " and (min-resolution: {$density}dppx)" : '',
                         ),
