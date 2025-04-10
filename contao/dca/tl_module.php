@@ -1,13 +1,7 @@
 <?php
 
-/**
- * Palettes.
- */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['pageimage'] = '{title_legend},name,headline,type;{config_legend},imgSize,inheritPageImage,levelOffset,randomPageImage,allPageImages;{reference_legend:hide},defineRoot;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID';
 
-/*
- * Fields
- */
 $GLOBALS['TL_DCA']['tl_module']['fields']['inheritPageImage'] = [
     'exclude' => true,
     'inputType' => 'checkbox',

@@ -1,6 +1,5 @@
 <?php
 
-use Contao\Config;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 $pm = PaletteManipulator::create()
@@ -29,7 +28,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
     'inputType' => 'fileTree',
     'exclude' => true,
-    'eval' => ['fieldType' => 'checkbox', 'orderField' => 'pageImageOrder', 'multiple' => true, 'files' => true, 'filesOnly' => true, 'extensions' => Config::get('validImageTypes'), 'isGallery' => true],
+    'eval' => ['fieldType' => 'checkbox', 'orderField' => 'pageImageOrder', 'multiple' => true, 'files' => true, 'filesOnly' => true, 'extensions' => '%contao.image.valid_extensions%', 'isGallery' => \true],
     'sql' => 'blob NULL',
 ];
 
