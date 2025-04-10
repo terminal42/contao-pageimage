@@ -33,10 +33,12 @@ class PageimageController extends AbstractFrontendModuleController
         }
 
         $templateData = [];
-        $figure = $this->studio->createFigureBuilder()->setSize($model->imgSize);
+        $figureBuilder = $this->studio->createFigureBuilder()->setSize($model->imgSize);
 
         foreach ($images as $image) {
-            if (!$figure = $figure->from($image['path'])->buildIfResourceExists()) {
+            $figure = $figureBuilder->from($image['path'])->buildIfResourceExists();
+
+            if (!$figure) {
                 continue;
             }
 
@@ -46,7 +48,7 @@ class PageimageController extends AbstractFrontendModuleController
             );
         }
 
-        if (empty($templateData)) {
+        if (!$templateData) {
             return new Response();
         }
 
