@@ -18,7 +18,7 @@ class ModuleMigration extends AbstractMigration
     {
         $schemaManager = $this->connection->createSchemaManager();
 
-        if (!$schemaManager->tablesExist('tl_module')) {
+        if (!$schemaManager->tablesExist(['tl_module'])) {
             return false;
         }
 

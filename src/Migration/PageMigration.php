@@ -16,9 +16,9 @@ class PageMigration extends AbstractMigration
 
     public function shouldRun(): bool
     {
-        $schemaManager = $this->connection->getSchemaManager();
+        $schemaManager = $this->connection->createSchemaManager();
 
-        if (null === $schemaManager || !$schemaManager->tablesExist('tl_page')) {
+        if (!$schemaManager->tablesExist(['tl_page'])) {
             return false;
         }
 
