@@ -1,22 +1,12 @@
 services:
     _defaults:
         autoconfigure: true
+        autowire: true
+
+    Terminal42\PageimageBundle\:
+        resource: ../src/
 
     _instanceof:
         Symfony\Bundle\FrameworkBundle\Controller\AbstractController:
             calls:
                 - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
-
-    Terminal42\PageimageBundle\PageimageHelper: ~
-
-    Terminal42\PageimageBundle\Controller\PageimageController:
-        arguments: ['@Terminal42\PageimageBundle\PageimageHelper', '@contao.image.studio']
-
-    Terminal42\PageimageBundle\EventListener\InsertTagsListener:
-        arguments: ['@Terminal42\PageimageBundle\PageimageHelper']
-
-    Terminal42\PageimageBundle\Migration\ModuleMigration:
-        arguments: ['@database_connection']
-
-    Terminal42\PageimageBundle\Migration\PageMigration:
-        arguments: [ '@database_connection' ]
