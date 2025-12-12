@@ -17,7 +17,7 @@ class PageimageRuntime implements RuntimeExtensionInterface
     ) {
     }
 
-    public function __invoke(int|null $index = 0, int|null $page = null): array|null
+    public function __invoke(int|null $index = 0, int|null $page = null, bool $inherit = true): array|null
     {
         if (null === $page) {
             $pageModel = $this->getCurrentPage();
@@ -29,7 +29,7 @@ class PageimageRuntime implements RuntimeExtensionInterface
             return null;
         }
 
-        return $this->helper->getOneByPageAndIndex($pageModel, $index);
+        return $this->helper->getOneByPageAndIndex($pageModel, $index, $inherit);
     }
 
     public function getCurrentPage(): PageModel|null
