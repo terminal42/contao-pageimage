@@ -28,13 +28,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['pageImage'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_page']['pageImage'],
     'inputType' => 'fileTree',
     'exclude' => true,
-    'eval' => ['fieldType' => 'checkbox', 'orderField' => 'pageImageOrder', 'multiple' => true, 'files' => true, 'filesOnly' => true, 'extensions' => '%contao.image.valid_extensions%', 'isGallery' => \true],
-    'sql' => 'blob NULL',
-];
-
-// field is used to store the order of the list of images in pageImage
-$GLOBALS['TL_DCA']['tl_page']['fields']['pageImageOrder'] = [
-    'eval' => ['doNotShow' => true],
+    'eval' => ['fieldType' => 'checkbox', 'isSortable' => true, 'multiple' => true, 'files' => true, 'filesOnly' => true, 'extensions' => '%contao.image.valid_extensions%', 'isGallery' => \true],
     'sql' => 'blob NULL',
 ];
 

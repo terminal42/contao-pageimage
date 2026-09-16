@@ -125,38 +125,8 @@ class PageimageHelper
 
                 $images[] = $image;
             }
-
-            $images = $this->sortImages($images, $page);
         }
 
         return $images;
-    }
-
-    private function sortImages(array $images, PageModel $pageModel): array
-    {
-        $order = StringUtil::deserialize($pageModel->pageImageOrder);
-
-        if (empty($order) || !\is_array($order)) {
-            return $images;
-        }
-
-        // Remove all values
-        $order = array_map(static function (): void {}, array_flip($order));
-
-        // Move the matching elements to their position in $order
-        foreach ($images as $k => $v) {
-            if (\array_key_exists($v['uuid'], $order)) {
-                $order[$v['uuid']] = $v;
-                unset($images[$k]);
-            }
-        }
-
-        // Append the left-over images at the end
-        if (!empty($images)) {
-            $order = array_merge($order, array_values($images));
-        }
-
-        // Remove empty (unreplaced) entries
-        return array_values(array_filter($order));
     }
 }
